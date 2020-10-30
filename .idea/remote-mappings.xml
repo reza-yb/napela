@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteMappingsManager">
+    <list>
+      <list>
+        <remote-mappings server-id="python@docker-compose://[/Users/reza/PycharmProjects/napela/docker-compose.yml, /Users/reza/PycharmProjects/napela/docker-compose.dev.yml]:web/python">
+          <settings>
+            <list>
+              <mapping local-root="~/PycharmProjects/napela" remote-root="/code" />
+            </list>
+          </settings>
+        </remote-mappings>
+      </list>
+    </list>
+  </component>
+</project>
