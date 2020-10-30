@@ -5,3 +5,4 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
+RUN curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
