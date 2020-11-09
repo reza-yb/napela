@@ -19,3 +19,10 @@ def get_ad_info(request, ad_id):
     ad = BookAd.objects.get(id=ad_id)
     context = {"ad": ad}
     return render(request, template_name, context)
+
+def delete_ad(request, ad_id):
+    ad = BookAd.objects.filter(id=ad_id)
+    ad.delete()
+
+def make_new_ad(request, ad_id):
+    pass
