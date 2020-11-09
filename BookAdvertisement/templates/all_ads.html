@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Ads</title>
+</head>
+<body>
+<ul>
+    {% for ad in book_ads %}
+        <li><a href="/"> {{ ad.title }} </a> </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
