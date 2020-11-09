@@ -13,5 +13,9 @@ def get_all_ads(request):
     context = {"book_ads": queryset}
     return render(request, template_name, context)
 
-# def show_ad_info(request):
-#     template_name =
+
+def get_ad_info(request, ad_id):
+    template_name = 'ad_info.html'
+    ad = BookAd.objects.get(id=ad_id)
+    context = {"ad": ad}
+    return render(request, template_name, context)

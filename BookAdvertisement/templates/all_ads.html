@@ -7,7 +7,7 @@
 <body>
 <ul>
     {% for ad in book_ads %}
-        <li><a href="/"> {{ ad.title }} </a> </li>
+        <li><a href="/ads/{{ ad.id }}"> {{ ad.title }} </a> </li>
     {% endfor %}
 </ul>
 </body>
