@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BookAdvertisement.apps.UniservConfig',
+    'django_heroku',
 ]
 
 MIDDLEWARE = [
