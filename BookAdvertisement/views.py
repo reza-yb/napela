@@ -1,5 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView
+
 from .models import BookAd
 
 
@@ -14,15 +17,23 @@ def get_all_ads(request):
     return render(request, template_name, context)
 
 
-def get_ad_info(request, ad_id):
+def get_ad_info(request, pk):
     template_name = 'ad_info.html'
-    ad = BookAd.objects.get(id=ad_id)
+    ad = BookAd.objects.get(pk=pk)
     context = {"ad": ad}
     return render(request, template_name, context)
 
-def delete_ad(request, ad_id):
-    ad = BookAd.objects.filter(id=ad_id)
-    ad.delete()
 
-def make_new_ad(request, ad_id):
-    pass
+class AdCreate(CreateView):
+    model = BookAd
+    fields = '__all__'
+
+
+class AdUpdate(UpdateView):
+    model = BookAd
+    fields = '__all__'
+
+
+class AdDelete(DeleteView):
+    model = BookAd
+    success_url = reverse_lazy('all-ads')

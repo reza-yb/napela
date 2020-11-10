@@ -1,8 +1,8 @@
 from django.db import models
+from django.urls import reverse
 
 
 class BookAd(models.Model):
-    id = models.IntegerField(primary_key=True)
     poster = models.ImageField(upload_to='ad_posters/', null=True, blank=True)
     title = models.CharField(max_length=30)
     author = models.CharField(max_length=30)
@@ -11,5 +11,8 @@ class BookAd(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('ad', kwargs={'pk': self.pk})
 
 
