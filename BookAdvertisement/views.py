@@ -15,14 +15,14 @@ def homePageView(request):
 def get_all_ads(request):
     template_name = 'all_ads.html'
     queryset = BookAd.objects.all()
-    context = {"book_ads": queryset}
+    context = {"page_title":"All ads","book_ads": queryset}
     return render(request, template_name, context)
 
 
 def get_ad_info(request, pk):
     template_name = 'ad_info.html'
     ad = BookAd.objects.get(pk=pk)
-    context = {"ad": ad}
+    context = {"page_title":"Ad info","ad": ad}
     return render(request, template_name, context)
 
 

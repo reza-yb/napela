@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All Ads</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <ul>
     {% for ad in book_ads %}
         <li><a href="/ads/{{ ad.id }}"> {{ ad.title }} </a> </li>
     {% endfor %}
 </ul>
-</body>
-</html>
+{% endblock content %}

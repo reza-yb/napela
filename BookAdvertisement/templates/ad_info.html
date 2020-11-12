@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Info</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <ul>
     Ad id : {{ ad.id }}
     <br> Ad title : {{ ad.title }}
@@ -12,6 +7,4 @@
     <br> poster : {{ ad.poster.url }}
     <img src="{{ ad.poster.url }}">
 </ul>
-
-</body>
-</html>
+{% endblock content %}
