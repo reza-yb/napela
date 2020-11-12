@@ -7,7 +7,9 @@ from .models import BookAd
 
 
 def homePageView(request):
-    return HttpResponse('Hello, World 2!')
+    template_name = 'base.html'
+    context = {"page_title":"Home Page"}
+    return render(request, template_name, context)
 
 
 def get_all_ads(request):

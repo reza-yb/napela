@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+</head>
+<body>
+    <div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="/" class="w3-bar-item w3-button">صفحه اصلی</a>
+    <div class="w3-right w3-hide-small">
+      <a href="/ads" class="w3-bar-item w3-button">آگهی ها</a>
+      <a href="/ads/new" class="w3-bar-item w3-button">آگهی جدید</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

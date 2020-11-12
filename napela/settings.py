@@ -19,10 +19,10 @@ import django_heroku
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
     # '/var/www/static/',
-    os.path.join(BASE_DIR, "static/files"),
+    os.path.join(BASE_DIR, "static/"),
 ]
 
 MEDIA_URL = '/media/'
