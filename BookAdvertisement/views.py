@@ -7,7 +7,7 @@ from .models import BookAd
 
 
 def homePageView(request):
-    template_name = 'base.html'
+    template_name = 'index.html'
     context = {"page_title":"Home Page"}
     return render(request, template_name, context)
 
