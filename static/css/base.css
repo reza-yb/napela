@@ -1,19 +1,62 @@
-html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
-html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
-h1{font-size:36px}
-h2{font-size:30px}
-h3{font-size:24px}
-h4{font-size:20px}
-h5{font-size:18px}
-h6{font-size:16px}
-h1,h2,h3,h4,h5,h6{font-family:"Serif",Arial,sans-serif;font-weight:600;margin:10px 0}
-hr{border:0;border-top:1px solid #eee;margin:20px 0}
-a{text-decoration: none}
-.w3-bar{width:100%;overflow:hidden;display:inline-block}
-.w3-bar .w3-bar-item{padding:8px 16px;float:left;width:auto;border:none;display:block;outline:0}
-.w3-button{white-space:normal}
-.w3-button:hover{color:#000!important;background-color:#ccc!important}
-.w3-top{position:fixed;width:100%;z-index:1;top:0}
-.w3-card{box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)}
-.w3-padding{padding:8px 16px!important}
-.w3-left{float:left!important}.w3-right{float:right!important}
+body {
+    min-height: 2000px;
+    padding-top: 54px;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: grayscale;
+}
+
+.ui.borderless.menu {
+    background-color: #f8f8f8;
+    box-shadow: none;
+    flex-wrap: wrap;
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ui.borderless.menu .header.item {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.ui.mobile.only.grid .ui.menu .ui.vertical.menu {
+    display: none;
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .dropdown.icon {
+    float: unset;
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .dropdown.icon:before {
+    content: "\f0d7";
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .ui.dropdown.item .menu {
+    position: static;
+    width: 100%;
+    background-color: unset;
+    border: none;
+    box-shadow: none;
+}
+
+.ui.mobile.only.grid .ui.vertical.menu .ui.dropdown.item .menu {
+    margin-top: 6px;
+}
+
+.ui.container > .ui.message {
+    background-color: rgb(238, 238, 238);
+    box-shadow: none;
+    padding: 5rem 4rem;
+    margin-top: 1rem;
+}
+
+.ui.message h1.ui.header {
+    font-size: 4.5rem;
+}
+
+.ui.message p.lead {
+    font-size: 1.3rem;
+    color: #333333;
+    line-height: 1.4;
+    font-weight: 300;
+}

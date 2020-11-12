@@ -1,20 +1,57 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+      name="description"
+      content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+    />
+    <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
+    <meta name="author" content="PPType" />
+    <meta name="theme-color" content="#ffffff" />
     <title>{{ page_title }}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
-</head>
-<body>
-    <div class="w3-top">
-  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-    <a href="/" class="w3-bar-item w3-button">صفحه اصلی</a>
-    <div class="w3-right w3-hide-small">
-      <a href="/ads" class="w3-bar-item w3-button">آگهی ها</a>
-      <a href="/ads/new" class="w3-bar-item w3-button">آگهی جدید</a>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" type="text/css" href="{%static 'css/bas.css' %}"/>
+  </head>
+
+  <body id="root">
+    <div class="ui tablet computer only padded grid">
+      <div class="ui top fixed borderless fluid huge menu">
+        <div class="ui container">
+          <a class="header item">Booky</a>
+          <div class="right menu">
+            <a href="/ads" class="item">آگهی ها</a>
+              <a href="/ads/new" class="item">ثبت آگهی</a>
+            <a href="/" class="active item">صفحه اصلی</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-</body>
+    <div class="ui mobile only padded grid">
+      <div class="ui top fixed borderless huge fluid menu">
+        <a class="header item">Booky</a>
+        <div class="right menu">
+          <div class="item">
+            <button class="ui icon toggle basic button">
+              <i class="content icon"></i>
+            </button>
+          </div>
+        </div>
+        <div class="ui vertical borderless fluid menu">
+          <a href="/ads" class="item">آگهی ها</a> <a href="ads/new" class="item">ثبت آگهی</a>
+          <a href="/" class="active item">صفحه اصلی</a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
