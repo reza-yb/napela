@@ -1,4 +1,6 @@
 body {
+    background-image: url("../images/pattern.jpg");
+    background-size: cover;
     min-height: 2000px;
     padding-top: 54px;
     -webkit-font-smoothing: antialiased;
