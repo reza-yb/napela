@@ -2,32 +2,44 @@
 {% load static %}
 
 {% block extra_header %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/ads.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ads.css' %}"/>
 {% endblock %}
 
+{% block links %}
+    <a href="/ads" class="item">آگهی ها</a>
+    <a href="ads/new" class="item">ثبت آگهی</a>
+    <a href="/" class="item">صفحه اصلی</a>
+{% endblock links %}
 
 {% block content %}
-<<<<<<< HEAD
-=======
 
-    <div class="ad_info">
-        <h1>
-            {{ ad.title }}
-        </h1>
+    <h1>
+        {{ ad.title }}
+    </h1>
+    <div class="info_container">
+        <img class="info_container__image" src="{{ ad.poster.url }}">
 
-        <ul>
-            Ad id : {{ ad.id }}
-            <br> Ad title : {{ ad.title }}
-            <br> Ad author : {{ ad.author }}
-            {% if ad.poster.url is not None %}
-                <img src="{{ ad.poster.url }}">
-            {% else %}
-                <img src="{% static 'images/default.jpg' %}">
-            {% endif %}
-        </ul>
+        <div class="container__text">
+            <ul>
+                <span class="iransansdn_bold_medium">
+                شماره آگهی :
+                </span>
+                <span class="iransansdn_small"> {{ ad.id }} </span>
+                <br> <span class="iransansdn_bold_medium">
+                نام کتاب :
+                </span>
+                <span class="iransansdn_small"> {{ ad.title }} </span>
+                <br> <span class="iransansdn_bold_medium">
+                نویسنده :
+                 </span>
+                <span class="iransansdn_small"> {{ ad.author }} </span>
+
+            </ul>
+        </div>
+
+
     </div>
 
 
 
->>>>>>> 6dd22438a428d4fe49b97ddf2842f58c4244d316
 {% endblock content %}
