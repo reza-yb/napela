@@ -1,34 +1,4 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>new ad</title>#}
-{##}
-{#</head>#}
-{#<body>#}
-{#<form method="POST" enctype="multipart/form-data">#}
-{##}
-{#    <!-- Security token -->#}
-{#    {% csrf_token %}#}
-{##}
-{#    <!-- Using the formset -->#}
-{#    {{ form.as_p }}#}
-{##}
-{##}
-{#    <input type="submit" value="Submit">#}
-{#</form>#}
-{##}
-{#</body>#}
-{#</html>#}
-
-
 {% extends 'base.html' %}
-
-{% block 'links' %}
-<a href="/ads" class="ui item">آگهی ها</a>
-<a href="ads/new" class="ui active item">ثبت آگهی</a>
-<a href="/" class="ui item">صفحه اصلی</a>
-{% endblock 'links' %}
 
 {% block content %}
  <form class="ui form" method="POST" enctype="multipart/form-data">

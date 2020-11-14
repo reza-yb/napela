@@ -39,12 +39,34 @@ class AdCreate(CreateView):
     model = BookAd
     fields = '__all__'
 
+    def get_context_data(self, **kwargs):
+        ctx = super(AdCreate, self).get_context_data(**kwargs)
+        temp_links = deepcopy(links)
+        temp_links[2]["class"] = "active item"
+        ctx['links'] = temp_links
+        ctx["page_title"] = "new ad"
+        return ctx
+
 
 class AdUpdate(UpdateView):
     model = BookAd
     fields = '__all__'
 
+    def get_context_data(self, **kwargs):
+        ctx = super(AdUpdate, self).get_context_data(**kwargs)
+        temp_links = deepcopy(links)
+        ctx['links'] = temp_links
+        ctx["page_title"] = "edit ad"
+        return ctx
+
 
 class AdDelete(DeleteView):
     model = BookAd
     success_url = reverse_lazy('all-ads')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(AdDelete, self).get_context_data(**kwargs)
+        temp_links = deepcopy(links)
+        ctx['links'] = temp_links
+        ctx["page_title"] = "delete ad"
+        return ctx
