@@ -31,7 +31,9 @@
         <div class="ui container">
           <a class="header item">Booky</a>
           <div class="right menu">
-            {% block 'links' %}{% endblock %}
+            {% for x in links %}
+                <a href="{{ x.href }}" class="{{ x.class }}">{{ x.title }}</a>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -40,7 +42,9 @@
       <div class="ui top fixed borderless huge fluid menu">
         <a class="header item">Booky</a>
         <div class="ui vertical borderless fluid menu">
-          <!--to do this part -->
+          {% for x in links %}
+                <a href="{{ x.href }}" class="{{ x.class }}">{{ x.title }}</a>
+            {% endfor %}
         </div>
       </div>
     </div>
