@@ -1,11 +1,13 @@
 .iransansdn_bold_medium {
     font-family: iransansdn;
     font-weight: bold;
-    font-size: medium;
+    font-size: 2em;
 }
 
 .iransansdn_small {
     font-family: iransansdn;
     font-weight: normal;
-    font-size: small;
+    font-size: 2em;
 }
+
+

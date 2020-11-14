@@ -1,38 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block extra_header %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ads.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ad_info.css' %}"/>
 {% endblock %}
 
 {% block links %}
-    <a href="/ads" class="item">آگهی ها</a>
-    <a href="ads/new" class="item">ثبت آگهی</a>
+    <a href="/ads" style="font-family: iransansdn" class="item">آگهی ها</a>
+    <a href="ads/new" style="font-family: iransansdn" class="item">ثبت آگهی</a>
     <a href="/" class="item">صفحه اصلی</a>
 {% endblock links %}
 
 {% block content %}
 
-    <h1>
+    <h1 class="ad_info_h1" style="text-align: center">
         {{ ad.title }}
     </h1>
     <div class="info_container">
         <img class="info_container__image" src="{{ ad.poster.url }}">
 
         <div class="container__text">
-            <ul>
-                <span class="iransansdn_bold_medium">
-                شماره آگهی :
-                </span>
-                <span class="iransansdn_small"> {{ ad.id }} </span>
-                <br> <span class="iransansdn_bold_medium">
-                نام کتاب :
-                </span>
-                <span class="iransansdn_small"> {{ ad.title }} </span>
-                <br> <span class="iransansdn_bold_medium">
-                نویسنده :
-                 </span>
-                <span class="iransansdn_small"> {{ ad.author }} </span>
+            <ul class="ad_info_ul">
+                <li class="ad_info_li"><span class="iransansdn_bold_medium">شماره آگهی :</span>
+                    <span class="iransansdn_small"> {{ ad.id }} </span></li>
+
+
+                <li class="ad_info_li"><span class="iransansdn_bold_medium">نام کتاب :</span>
+                    <span class="iransansdn_small"> {{ ad.title }} </span></li>
+
+                <li class="ad_info_li"><span class="iransansdn_bold_medium">نویسنده :</span>
+                    <span class="iransansdn_small"> {{ ad.author }} </span></li>
+
+                <li class="ad_info_li"><span class="iransansdn_bold_medium">توضیحات :</span>
+                    <span class="iransansdn_small"> {{ ad.description }} </span></li>
 
             </ul>
         </div>

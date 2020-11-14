@@ -16,7 +16,7 @@ body {
 
 .ui.borderless.menu .header.item {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: bold;
 }
 
 .ui.mobile.only.grid .ui.menu .ui.vertical.menu {
@@ -46,16 +46,19 @@ body {
 .ui.container > .ui.message {
     background-color: rgb(238, 238, 238);
     box-shadow: none;
-    padding: 5rem 4rem;
-    margin-top: 1rem;
+    padding: 3rem 2rem;
+    margin-top: 1.5rem;
 }
 
 .ui.message h1.ui.header {
-    font-size: 4.5rem;
+    direction: rtl;
+    color: #333333;
+    font-size: 2rem;
 }
 
 .ui.message p.lead {
-    font-size: 1.3rem;
+    direction: rtl;
+    font-size: 1.5rem;
     color: #333333;
     line-height: 1.4;
     font-weight: 300;
