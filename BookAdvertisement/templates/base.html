@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 {% load static %}
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+<head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
     />
     <meta
-      name="description"
-      content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+            name="description"
+            content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
     />
-    <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
-    <meta name="author" content="PPType" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="keywords" content="Semantic-UI, Theme, Design, Template"/>
+    <meta name="author" content="PPType"/>
+    <meta name="theme-color" content="#ffffff"/>
     <title>{{ page_title }}</title>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      type="text/css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            type="text/css"
     />
-    <link rel="stylesheet" type="text/css" href="{%static 'css/base.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{%static 'css/dist/semantic.css' %}"/>
-  </head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dist/semantic.css' %}"/>
+    {% block extra_header %}{% endblock extra_header %}
+</head>
 
-  <body id="root">
-    <div class="ui tablet computer only padded grid">
-      <div class="ui top fixed borderless fluid huge menu">
+<body id="root">
+<div class="ui tablet computer only padded grid">
+    <div class="ui top fixed borderless fluid huge menu">
         <div class="ui container">
-          <a class="header item">Booky</a>
-          <div class="right menu">
-            {% for x in links %}
-                <a href="{{ x.href }}" class="{{ x.class }}">{{ x.title }}</a>
-            {% endfor %}
-          </div>
+            <a class="header item">Booky</a>
+            <div class="right menu">
+                {% for x in links %}
+                    <a href="{{ x.href }}" class="{{ x.class }}">{{ x.title }}</a>
+                {% endfor %}
+            </div>
         </div>
-      </div>
     </div>
+</div>
 
-  <div class="ui mobile only padded grid">
-      <div class="ui top fixed borderless huge fluid menu">
+<div class="ui mobile only padded grid">
+    <div class="ui top fixed borderless huge fluid menu">
         <a class="header item">Project Name</a>
         <div class="right menu">
-          <div class="item">
-            <button class="ui icon toggle basic button">
-              <i class="content icon"></i>
-            </button>
-          </div>
+            <div class="item">
+                <button class="ui icon toggle basic button">
+                    <i class="content icon"></i>
+                </button>
+            </div>
         </div>
         <div class="ui vertical borderless fluid menu">
-          <a class="active item">Home</a> <a class="item">About</a>
-          <a class="item">Contact</a>
-          <div class="ui dropdown item">
-            Dropdown<i class="dropdown icon"></i>
-            <div class="menu">
-              <a class="item"> Action </a> <a class="item"> Another action </a>
-              <a class="item"> Something else here </a>
-              <div class="divider"></div>
-              <div class="header">Navbar header</div>
-              <a class="item"> Seperated link </a>
-              <a class="item"> One more seperated link </a>
+            <a class="active item">Home</a> <a class="item">About</a>
+            <a class="item">Contact</a>
+            <div class="ui dropdown item">
+                Dropdown<i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item"> Action </a> <a class="item"> Another action </a>
+                    <a class="item"> Something else here </a>
+                    <div class="divider"></div>
+                    <div class="header">Navbar header</div>
+                    <a class="item"> Seperated link </a>
+                    <a class="item"> One more seperated link </a>
+                </div>
             </div>
-          </div>
-          <a class="item">Default</a> <a class="item">Static top</a>
-          <a class="active item">Fixed top</a>
+            <a class="item">Default</a> <a class="item">Static top</a>
+            <a class="active item">Fixed top</a>
         </div>
-      </div>
     </div>
+</div>
 
-      {% block content %}{% endblock content %}
+{% block content %}{% endblock content %}
 
-  </body>
+</body>
 </html>

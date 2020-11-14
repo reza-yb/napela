@@ -1,11 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_header %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ads.css' %}"/>
+{% endblock %}
+
+
 {% block content %}
-<ul>
-    Ad id : {{ ad.id }}
-    <br> Ad title : {{ ad.title }}
-    <br> Ad author : {{ ad.author }}
-    {% if ad.poster.url is not None %}
-        <img src="{{ ad.poster.url }}">
-    {% endif %}
-</ul>
+<<<<<<< HEAD
+=======
+
+    <div class="ad_info">
+        <h1>
+            {{ ad.title }}
+        </h1>
+
+        <ul>
+            Ad id : {{ ad.id }}
+            <br> Ad title : {{ ad.title }}
+            <br> Ad author : {{ ad.author }}
+            {% if ad.poster.url is not None %}
+                <img src="{{ ad.poster.url }}">
+            {% else %}
+                <img src="{% static 'images/default.jpg' %}">
+            {% endif %}
+        </ul>
+    </div>
+
+
+
+>>>>>>> 6dd22438a428d4fe49b97ddf2842f58c4244d316
 {% endblock content %}

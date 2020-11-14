@@ -22,4 +22,4 @@ class Migration(migrations.Migration):
                 ('sell', models.BooleanField()),
             ],
         ),
-    ]
+        ]
