@@ -13,7 +13,11 @@
         <div class="responsive">
             <div class="gallery">
                 <a target="_blank" href="/ads/{{ ad.id }}"> {{ ad.title }}>
-                    <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
+                    {% if ad.poster.url is not None %}
+                        <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
+                    {% else %}
+                        <img src="{% static 'images/default.jpg' %}" alt="Cinque Terre" width="600" height="400">
+                    {% endif %}
                 </a>
                 <div class="desc">
                     <ul style="list-style-type: none ; background-color: floralwhite ; padding: 10px 10px 10px">
