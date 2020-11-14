@@ -38,16 +38,38 @@
         </div>
       </div>
     </div>
-    <div class="ui mobile only padded grid">
+
+  <div class="ui mobile only padded grid">
       <div class="ui top fixed borderless huge fluid menu">
-        <a class="header item">Booky</a>
+        <a class="header item">Project Name</a>
+        <div class="right menu">
+          <div class="item">
+            <button class="ui icon toggle basic button">
+              <i class="content icon"></i>
+            </button>
+          </div>
+        </div>
         <div class="ui vertical borderless fluid menu">
-          {% for x in links %}
-                <a href="{{ x.href }}" class="{{ x.class }}">{{ x.title }}</a>
-            {% endfor %}
+          <a class="active item">Home</a> <a class="item">About</a>
+          <a class="item">Contact</a>
+          <div class="ui dropdown item">
+            Dropdown<i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item"> Action </a> <a class="item"> Another action </a>
+              <a class="item"> Something else here </a>
+              <div class="divider"></div>
+              <div class="header">Navbar header</div>
+              <a class="item"> Seperated link </a>
+              <a class="item"> One more seperated link </a>
+            </div>
+          </div>
+          <a class="item">Default</a> <a class="item">Static top</a>
+          <a class="active item">Fixed top</a>
         </div>
       </div>
     </div>
-        {% block content %}{% endblock content %}
+
+      {% block content %}{% endblock content %}
+
   </body>
 </html>
