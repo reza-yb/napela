@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block extra_header %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/all_ads.css' %}"/>
 {% endblock %}
@@ -9,7 +10,6 @@
     <h1 class="ad_info_h1" style="text-align: center">لیست آگهی‌ها</h1>
 
     {% for ad in book_ads %}
-        {#    <li><a href="/ads/{{ ad.id }}"> {{ ad.title }} </a></li>#}
         <div class="responsive">
             <div class="gallery">
                 <a target="_blank" href="/ads/{{ ad.id }}"> {{ ad.title }}>
@@ -18,11 +18,11 @@
                 <div class="desc">
                     <ul style="list-style-type: none">
 
-                        <li><span class="iransansdn_bold_size1">نام کتاب :</span>
-                            <span class="iransansdn_size1"> {{ ad.title }} </span></li>
+                        <li><span class="iransansdn_bold_size1_5">نام کتاب :</span>
+                            <span class="iransansdn_size1_5"> {{ ad.title }} </span></li>
 
-                        <li><span class="iransansdn_bold_size1">نویسنده :</span>
-                            <span class="iransansdn_size1"> {{ ad.author }} </span></li>
+                        <li><span class="iransansdn_bold_size1_5">نویسنده :</span>
+                            <span class="iransansdn_size1_5"> {{ ad.author }} </span></li>
                     </ul>
                 </div>
             </div>

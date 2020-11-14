@@ -20,7 +20,7 @@ def homePageView(request):
 
 
 def get_all_ads(request):
-    template_name = 'temp.html'
+    template_name = 'all_ads.html'
     queryset = BookAd.objects.all()
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"

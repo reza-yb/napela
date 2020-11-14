@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/bg1.jpg");
+    background-image: url("../images/bg.jpg");
     background-size: cover;
     background-color: #cccccc;
 }
@@ -14,7 +14,7 @@ body {
 }
 
 div.gallery {
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
 }
 
 div.gallery:hover {
