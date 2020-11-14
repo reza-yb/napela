@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="ad_info_h1" style="text-align: center">لیست آگهی‌ها</h1>
+    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>
 
     {% for ad in book_ads %}
         <div class="responsive">
@@ -16,7 +16,7 @@
                     <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
                 </a>
                 <div class="desc">
-                    <ul style="list-style-type: none">
+                    <ul style="list-style-type: none ; background-color: floralwhite ; padding: 10px 10px 10px">
 
                         <li><span class="iransansdn_bold_size1_5">نام کتاب :</span>
                             <span class="iransansdn_size1_5"> {{ ad.title }} </span></li>
