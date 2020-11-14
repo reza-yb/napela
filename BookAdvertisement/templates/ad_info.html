@@ -4,7 +4,8 @@
     Ad id : {{ ad.id }}
     <br> Ad title : {{ ad.title }}
     <br> Ad author : {{ ad.author }}
-    <br> poster : {{ ad.poster.url }}
-    <img src="{{ ad.poster.url }}">
+    {% if ad.poster.url is not None %}
+        <img src="{{ ad.poster.url }}">
+    {% endif %}
 </ul>
 {% endblock content %}
