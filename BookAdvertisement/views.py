@@ -7,7 +7,7 @@ from copy import deepcopy
 from .models import BookAd
 
 links = [{"href": "/", "class": "item", "title": "صفحه اصلی"},
-         {"href": "/ads", "class": "item", "title": "آگهی ها"},
+         {"href": "/ads", "class": "item", "title": "آگهی‌ها"},
          {"href": "/ads/new", "class": "item", "title": "ثبت آگهی"}]
 
 
