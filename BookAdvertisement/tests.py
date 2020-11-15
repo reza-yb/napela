@@ -1,11 +1,10 @@
 import os
-from urllib.request import urlretrieve
 
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.test import TestCase
+from django.urls import reverse
 
-# Create your tests here.
 from BookAdvertisement.models import BookAd
 
 
@@ -42,3 +41,31 @@ class BookAdTests(TestCase):
         with self.assertRaises(ValidationError):
             url = "static/test/book_image.jpg"
             create_book_ad(sell=False, poster_url=url)
+
+
+class AllAdsViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        for i in range(100):
+            create_book_ad(title=f'test_title_{i}')
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get('/ads/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_url_accessible_by_name(self):
+        response = self.client.get(reverse('all-ads'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse('all-ads'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'all_ads.html')
+
+    def test_latest_ads_present(self):
+        ads = BookAd.objects.order_by('id')
+        response = self.client.get(reverse('all-ads'))
+        print(response.content)
+        for i in range(10):
+            self.assertInHTML(ads[-i].title, str(response.content))
+
