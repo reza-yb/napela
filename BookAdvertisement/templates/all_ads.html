@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>
+{#    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>#}
 
     {#    {% for ad in book_ads %}#}
     {#        <div class="responsive">#}
@@ -40,19 +40,19 @@
                         {% if ad.poster.url is not None %}
                             <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
                         {% else %}
-                            {% if ad.sell %}
-                                <img src="{% static 'images/sell_default.png' %}" alt="Cinque Terre" width="600"
+                            <img src="{% static 'images/sell_default.png' %}" alt="Cinque Terre" width="600"
                                      height="400">
-                            {% else %}
-                                <img src="{% static 'images/buy_default.png' %}" alt="Cinque Terre" width="600"
-                                     height="400">
-                            {% endif %}
                         {% endif %}
                     </div>
                     <div class="content">
                         <a class="header">{{ ad.title }}</a>
                         <div class="meta">
                             <a>{{ ad.author }}</a>
+                            {% if ad.sell %}
+                                <a>فروش</a>
+                            {% else %}
+                                <a>خرید</a>
+                            {% endif %}
                         </div>
                         <div class="description">{{ ad.description }}</div>
                         <div class="extra">
