@@ -4,7 +4,6 @@
 
 {% block extra_header %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/ad_info.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/new_add.css' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -36,9 +35,22 @@
 
             </ul>
         </div>
+        <form action="/ads/{{ ad.id }}/edit">
+            {% csrf_token %}
+            <button style="width: 70px;height: 50px;margin-top: 20px;
+            border-radius: 10px;transition-duration: 0.4s;
+            background-color: #0e8c8c;color: whitesmoke;" type="submit">Edit</button>
+        </form>
 
-        <a href="/ads/{{ ad.id }}/edit" class="edit_button" tabindex="0">Edit</a>
-        <a href="/ads/{{ ad.id }}/delete" class="delete_button" tabindex="0">Delete</a>
+        <form action="/ads/{{ ad.id }}/delete">
+            {% csrf_token %}
+            <button style="width: 70px;height: 50px;margin-top: 20px;
+            border-radius: 10px;transition-duration: 0.4s;
+            background-color: #0e8c8c;color: whitesmoke;
+            " type="submit">Delete</button>
+        </form>
+
+
 
     </div>
 
