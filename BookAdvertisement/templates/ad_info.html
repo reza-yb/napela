@@ -35,20 +35,10 @@
 
             </ul>
         </div>
-        <form action="/ads/{{ ad.id }}/edit">
-            {% csrf_token %}
-            <button style="width: 70px;height: 50px;margin-top: 20px;
-            border-radius: 10px;transition-duration: 0.4s;
-            background-color: #0e8c8c;color: whitesmoke;" type="submit">Edit</button>
-        </form>
 
-        <form action="/ads/{{ ad.id }}/delete">
-            {% csrf_token %}
-            <button style="width: 70px;height: 50px;margin-top: 20px;
-            border-radius: 10px;transition-duration: 0.4s;
-            background-color: #0e8c8c;color: whitesmoke;
-            " type="submit">Delete</button>
-        </form>
+        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">Edit</button>
+        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">Delete</button>
+
 
 
 
