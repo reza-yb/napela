@@ -7,31 +7,15 @@
 {% endblock %}
 
 {% block content %}
-{#    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>#}
+    <div class="ui container">
 
-    {#    {% for ad in book_ads %}#}
-    {#        <div class="responsive">#}
-    {#            <div class="gallery">#}
-    {#                <a target="_blank" href="/ads/{{ ad.id }}"> {{ ad.title }}>#}
-    {#                    {% if ad.poster.url is not None %}#}
-    {#                        <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">#}
-    {#                    {% else %}#}
-    {#                        <img src="{% static 'images/default.jpg' %}" alt="Cinque Terre" width="600" height="400">#}
-    {#                    {% endif %}#}
-    {#                </a>#}
-    {#                <div class="desc">#}
-    {#                    <ul style="list-style-type: none ; background-color: floralwhite ; padding: 10px 10px 10px">#}
-    {##}
-    {#                        <li><span class="iransansdn_bold_size1_5">نام کتاب :</span>#}
-    {#                            <span class="iransansdn_size1_5"> {{ ad.title }} </span></li>#}
-    {##}
-    {#                        <li><span class="iransansdn_bold_size1_5">نویسنده :</span>#}
-    {#                            <span class="iransansdn_size1_5"> {{ ad.author }} </span></li>#}
-    {#                    </ul>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    {% endfor %}#}
+        <div class="ui message">
+            <h1 class="ui huge header">Booky</h1>
+            <p style="font-family: iransansdn; font-weight: bold" class="lead">
+                مکانی برای تبادل کتاب های شما
+            </p>
+        </div>
+    </div>
     <br>
     <div class="ui container">
         <div class="ui relaxed divided items">
