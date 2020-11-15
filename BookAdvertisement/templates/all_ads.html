@@ -35,7 +35,7 @@
     <div class="ui container">
         <div class="ui relaxed divided items">
             {% for ad in book_ads %}
-                <div class="item" target="_blank" href="/ads/{{ ad.id }}">
+                <div class="item">
                     <div class="ui small image">
                         {% if ad.poster.url is not None %}
                             <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
@@ -50,10 +50,10 @@
                         </div>
                         <div class="description">{{ ad.description }}</div>
                         <div class="extra">
-                            <div href="/ads/{{ ad.id }}" class="ui right floated primary button">
+                            <a href="/ads/{{ ad.id }}" class="ui right floated primary button">
                                 اطلاعات بیشتر
                                 <i class="right chevron icon"></i>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
