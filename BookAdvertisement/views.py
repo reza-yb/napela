@@ -11,7 +11,7 @@ links = [{"href": "/", "class": "item", "title": "صفحه اصلی"},
          {"href": "/ads/new", "class": "item", "title": "ثبت آگهی"}]
 
 
-def homePageView(request):
+def home_page_view(request):
     template_name = 'index.html'
     temp_links = deepcopy(links)
     temp_links[0]["class"] = "active item"
