@@ -40,7 +40,6 @@ class AdCreate(CreateView):
     model = BookAd
     fields = '__all__'
 
-
     def get_context_data(self, **kwargs):
         ctx = super(AdCreate, self).get_context_data(**kwargs)
         temp_links = deepcopy(links)
