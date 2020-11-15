@@ -63,9 +63,8 @@ class AllAdsViewTest(TestCase):
         self.assertTemplateUsed(response, 'all_ads.html')
 
     def test_latest_ads_present(self):
-        ads = BookAd.objects.order_by('id')
+        ads = BookAd.objects.order_by('-id')[:10]
         response = self.client.get(reverse('all-ads'))
-        print(response.content)
-        for i in range(10):
-            self.assertInHTML(ads[-i].title, str(response.content))
+        for ad in ads:
+            self.assertInHTML(ad.title, str(response.content))
 
