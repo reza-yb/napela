@@ -83,9 +83,25 @@ body {
 /*    overflow: auto;*/
 /*}*/
 
-.button:hover{
-    background-color: darkgreen;
+.edit_button{
+    width: 70px;height: 50px;
+    margin-right: 20px;
+            border-radius: 10px;transition-duration: 0.4s;
+            background-color: #0e8c8c;color: whitesmoke;
 }
 
+.delete_button{
+    width: 70px;height: 50px;
+    border-radius: 10px;transition-duration: 0.4s;
+            background-color: #0e8c8c;color: whitesmoke;
+}
+
+.edit_button:hover{
+    background-color: #1aa62a;
+}
+
+.delete_button:hover{
+    background-color: #bd081c;
+}
 
 
