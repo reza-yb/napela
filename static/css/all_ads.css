@@ -1,6 +1,5 @@
 body {
-    background-image: url("../images/pattern.jpg");
-    opacity: 70%;
+    /*background-image: url("../images/pattern.jpg");*/
     background-size: cover;
     background-color: #cccccc;
 }
@@ -12,6 +11,16 @@ body {
     padding: 20px 20px 20px;
     font-family: iransansdn;
     font-size: 3rem;
+}
+
+.minimal_info_container {
+    position: relative;
+    margin: auto;
+    background-position: center center;
+    border: 5px solid #0e566c;
+    border-radius: 10px;
+    background-color: #E5F9E7;
+    background-size: cover;
 }
 
 div.gallery {
