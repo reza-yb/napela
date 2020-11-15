@@ -14,6 +14,7 @@ body {
 }
 
 .info_container {
+    direction: rtl;
     position: relative;
     margin: auto;
     background-position: center center;
@@ -40,7 +41,7 @@ body {
 }
 
 .submit_button {
-    border-radius: 10px;
+    border-radius: 20px;
     transition-duration: 0.4s;
     background-color: #0e8c8c;
     color: whitesmoke;

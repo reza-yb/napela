@@ -15,7 +15,11 @@
         {% if ad.poster.url is not None %}
             <img class="info_container__image" src="{{ ad.poster.url }}">
         {% else %}
-            <img class="info_container__image" src="{% static 'images/default.jpg' %}">
+            {% if ad.sell %}
+                <img class="info_container__image" src="{% static 'images/sell_default.png' %}">
+            {% else %}
+                <img class="info_container__image" src="{% static 'images/buy_default.png' %}">
+            {% endif %}
         {% endif %}
 
         <div class="container__text">
@@ -48,8 +52,6 @@
 
         <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>
         <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>
-
-
 
 
     </div>

@@ -7,19 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="new_ad_h2" style="text-align: center">{{ nav }}</h2>
+    <h2 class="new_ad_h2" style="text-align: center">{{ nav }}</h2>
     <div class="info_container">
 
- <form class="ui form" method="POST" enctype="multipart/form-data">
+        <form class="ui form" method="POST" enctype="multipart/form-data">
 
-    <!-- Security token -->
-    {% csrf_token %}
-    <!-- Using the formset -->
-     {{ form.as_p }}
+            <!-- Security token -->
+            {% csrf_token %}
+            <!-- Using the formset -->
+            {{ form.as_p }}
 
 
-    <input class="submit_button" type="submit" value="Submit">
-</form>
-        </div>
+            <input class="submit_button" type="submit" value="ثبت">
+        </form>
+    </div>
 
 {% endblock content %}
