@@ -15,7 +15,7 @@ def home_page_view(request):
     template_name = 'index.html'
     temp_links = deepcopy(links)
     temp_links[0]["class"] = "active item"
-    context = {"page_title": "Home Page", "links": temp_links}
+    context = {"page_title": "کتاب‌باز - سامانه‌ی تبادل کتاب هوشمند", "links": temp_links}
     return render(request, template_name, context)
 
 
@@ -24,7 +24,7 @@ def get_all_ads(request):
     queryset = BookAd.objects.all()
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"
-    context = {"page_title": "All ads", "book_ads": queryset, "links": temp_links}
+    context = {"page_title": "کلیه‌ی آگهی‌ها", "book_ads": queryset, "links": temp_links}
     return render(request, template_name, context)
 
 
@@ -45,7 +45,7 @@ class AdCreate(CreateView):
         temp_links = deepcopy(links)
         temp_links[2]["class"] = "active item"
         ctx['links'] = temp_links
-        ctx["page_title"] = "new ad"
+        ctx["page_title"] = "آگهی جدید"
         ctx["nav"] = "آگهی جدید"
         return ctx
 
