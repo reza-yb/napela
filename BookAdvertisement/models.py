@@ -4,11 +4,11 @@ from django.urls import reverse
 
 
 class BookAd(models.Model):
-    poster = models.ImageField(upload_to='ad_posters/', null=True, blank=True)
-    title = models.CharField(max_length=30)
-    author = models.CharField(max_length=30)
-    description = models.TextField(max_length=500)
-    sell = models.BooleanField()
+    poster = models.ImageField("تصویر", upload_to='ad_posters/', null=True, blank=True)
+    title = models.CharField("نام کتاب", max_length=30)
+    author = models.CharField("نام نویسنده", max_length=30)
+    description = models.TextField("توضیحات", max_length=500)
+    sell = models.BooleanField("فروشی")
 
     def __str__(self):
         return self.title
