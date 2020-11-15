@@ -131,6 +131,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-if 'HOME' in os.environ and '/app' in os.environ['HOME']:
+if 'HOME' in os.environ and '/code' in os.environ['HOME']:
     import django_heroku
     django_heroku.settings(locals())
