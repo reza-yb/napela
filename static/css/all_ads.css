@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/pattern.jpg");
+    /*background-image: url("../images/pattern.jpg");*/
     background-size: cover;
     background-color: #cccccc;
 }
@@ -11,6 +11,32 @@ body {
     padding: 20px 20px 20px;
     font-family: iransansdn;
     font-size: 3rem;
+}
+
+.minimal_info_container {
+    position: relative;
+    margin: auto;
+    background-position: center center;
+    border: 2px solid #0e566c;
+    border-radius: 10px;
+    /*padding: 20px 40px 40px;*/
+    /*width: 1000px;*/
+    /*height: 500px;*/
+    /*max-width: 600px;*/
+}
+
+.minimal_info_container::after {
+    /*background: url("../images/pattern.jpg");*/
+    background-color: #E5F9E7;
+    background-size: cover;
+    position: absolute;
+    content: "";
+    /*opacity: 0.7;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    /*z-index: -1;*/
 }
 
 div.gallery {

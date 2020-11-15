@@ -35,7 +35,7 @@
     <div class="ui container">
         <div class="ui relaxed divided items">
             {% for ad in book_ads %}
-                <div class="item">
+                <div class="item minimal_info_container">
                     <div href="/ads/{{ ad.id }}" class="ui small image">
                         {% if ad.poster.url is not None %}
                             <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
