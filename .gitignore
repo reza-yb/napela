@@ -177,5 +177,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 #new
-.idea/misc.xml
-.idea/napela.iml
+.idea/

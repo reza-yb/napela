@@ -1,5 +1,6 @@
 body {
-    background-image: url("../images/bg.jpg");
+    background-image: url("../images/pattern.jpg");
+    opacity: 70%;
     background-size: cover;
     background-color: #cccccc;
 }
