@@ -4,68 +4,117 @@
 
 {% block extra_header %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/all_ads.css' %}"/>
+
+    <!--- Component JS -->
+    <script src="assets/library/jquery.min.js"></script>
+    <script src="assets/library/iframe-content.js"></script>
+    <script type="text/javascript" src="{%  static 'css/dist/components/popup.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'css/dist/components/dimmer.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'css/dist/components/rating.js' %}"></script>
+    <script type="text/javascript" src="{% static 'css/dist/components/transition.js' %}"></script>
+
+    <!--- Show Names -->
+    <script src="assets/show-examples.js"></script>
+
+    <!--- Example CSS -->
+    <style>
+    body {
+    padding: 1em;
+    }
+    </style>
+
+    <!--- Example Javascript -->
+    <script>
+    $(document)
+    .ready(function() {
+    $('.special.card .image').dimmer({
+    on: 'hover'
+    });
+    $('.star.rating')
+    .rating()
+    ;
+    $('.card .dimmer')
+    .dimmer({
+      on: 'hover'
+    })
+    ;
+    })
+    ;
+    </script>
 {% endblock %}
 
 {% block content %}
-{#    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>#}
+{#    <div class="ui container">#}
+{#        <div class="ui relaxed divided items">#}
+{#            {% for ad in book_ads %}#}
+{#                <div class="minimal_info_container item">#}
+{#                    <div href="/ads/{{ ad.id }}" class="ui small image">#}
+{#                        {% if ad.poster.url is not None %}#}
+{#                            <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">#}
+{#                        {% else %}#}
+{#                            <img src="{% static 'images/default.png' %}" alt="Cinque Terre" width="600"#}
+{#                                     height="400">#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                    <div class="content">#}
+{#                        <a class="header">{{ ad.title }}</a>#}
+{#                        <div class="meta">#}
+{#                            <a>{{ ad.author }}</a>#}
+{#                        </div>#}
+{#                        <div class="description">{{ ad.description }}</div>#}
+{#                        <div class="extra">#}
+{#                            <a href="/ads/{{ ad.id }}" class="ui right floated primary button">#}
+{#                                اطلاعات بیشتر#}
+{#                                <i class="right chevron icon"></i>#}
+{#                            </a>#}
+{#                            {% if ad.sell %}#}
+{#                                <div class="ui label">فروش</div>#}
+{#                            {% else %}#}
+{#                                <div class="ui label">خرید</div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
 
-    {#    {% for ad in book_ads %}#}
-    {#        <div class="responsive">#}
-    {#            <div class="gallery">#}
-    {#                <a target="_blank" href="/ads/{{ ad.id }}"> {{ ad.title }}>#}
-    {#                    {% if ad.poster.url is not None %}#}
-    {#                        <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">#}
-    {#                    {% else %}#}
-    {#                        <img src="{% static 'images/default.jpg' %}" alt="Cinque Terre" width="600" height="400">#}
-    {#                    {% endif %}#}
-    {#                </a>#}
-    {#                <div class="desc">#}
-    {#                    <ul style="list-style-type: none ; background-color: floralwhite ; padding: 10px 10px 10px">#}
-    {##}
-    {#                        <li><span class="iransansdn_bold_size1_5">نام کتاب :</span>#}
-    {#                            <span class="iransansdn_size1_5"> {{ ad.title }} </span></li>#}
-    {##}
-    {#                        <li><span class="iransansdn_bold_size1_5">نویسنده :</span>#}
-    {#                            <span class="iransansdn_size1_5"> {{ ad.author }} </span></li>#}
-    {#                    </ul>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    {% endfor %}#}
-    <div class="ui container">
-        <div class="ui relaxed divided items">
-            {% for ad in book_ads %}
-                <div class="minimal_info_container item">
-                    <div href="/ads/{{ ad.id }}" class="ui small image">
-                        {% if ad.poster.url is not None %}
-                            <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
-                        {% else %}
-                            <img src="{% static 'images/sell_default.png' %}" alt="Cinque Terre" width="600"
-                                     height="400">
-                        {% endif %}
-                    </div>
+    <div class="ui four cards">
+        {% for ad in book_ads %}
+            <div class="ui card">
+            <div class="blurring dimmable image">
+                <div class="ui dimmer">
                     <div class="content">
-                        <a class="header">{{ ad.title }}</a>
-                        <div class="meta">
-                            <a>{{ ad.author }}</a>
-                            {% if ad.sell %}
-                                <a>فروش</a>
-                            {% else %}
-                                <a>خرید</a>
-                            {% endif %}
-                        </div>
-                        <div class="description">{{ ad.description }}</div>
-                        <div class="extra">
-                            <a href="/ads/{{ ad.id }}" class="ui right floated primary button">
-                                اطلاعات بیشتر
-                                <i class="right chevron icon"></i>
-                            </a>
+                        <div class="center">
+                            <a href="/ads/{{ ad.id }}" class="ui inverted button">اطلاعات بیشتر</a>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                {% if ad.poster.url is not None %}
+                    <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
+                {% else %}
+                    <img src="{% static 'images/default.png' %}" alt="Cinque Terre" width="600"
+                                     height="400">
+                {% endif %}
+            </div>
+            <div class="content">
+                <a class="header">{{ ad.title }}</a>
+                <div class="meta">
+                    <span class="date">{{ ad.author }}</span>
+                </div>
+                <div class="description">{{ ad.description }}</div>
+            </div>
+            <div class="extra content">
+                {% if ad.sell %}
+                    <div class="ui label">فروش</div>
+                {% else %}
+                    <div class="ui label">خرید</div>
+                {% endif %}
+            </div>
+        {% endfor %}
         </div>
-    </div>
+
+</div>
 
 
     <div class="clearfix"></div>
