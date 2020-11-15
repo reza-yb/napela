@@ -46,8 +46,30 @@ body {
     color: whitesmoke;
 }
 
+.edit_button {
+    border-radius: 10px;
+    transition-duration: 0.4s;
+    background-color: #0e8c8c;
+    color: forestgreen;
+}
+
+.delete_button {
+    border-radius: 10px;
+    transition-duration: 0.4s;
+    background-color: #0e8c8c;
+    color: #DD4B39;
+}
+
 .submit_button:hover{
     background-color: #00b5ad;
+}
+
+.edit_button:hover{
+    background-color: darkgreen;
+}
+
+.delete_button:hover{
+    background-color: darkred;
 }
 
 

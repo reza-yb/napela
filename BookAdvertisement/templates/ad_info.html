@@ -4,6 +4,7 @@
 
 {% block extra_header %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/ad_info.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/new_add.css' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -36,9 +37,9 @@
             </ul>
         </div>
 
+        <a href="/ads/{{ ad.id }}/edit" class="edit_button" tabindex="0">Edit</a>
+        <a href="/ads/{{ ad.id }}/delete" class="delete_button" tabindex="0">Delete</a>
 
     </div>
-
-
 
 {% endblock content %}
