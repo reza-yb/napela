@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>
+{#    <h2 class="all_ads_h2" style="text-align: center">لیست آگهی‌ها</h2>#}
 
     {#    {% for ad in book_ads %}#}
     {#        <div class="responsive">#}
@@ -40,26 +40,26 @@
                         {% if ad.poster.url is not None %}
                             <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
                         {% else %}
-                            {% if ad.sell %}
-                                <img src="{% static 'images/sell_default.png' %}" alt="Cinque Terre" width="600"
+                            <img src="{% static 'images/default.png' %}" alt="Cinque Terre" width="600"
                                      height="400">
-                            {% else %}
-                                <img src="{% static 'images/buy_default.png' %}" alt="Cinque Terre" width="600"
-                                     height="400">
-                            {% endif %}
                         {% endif %}
                     </div>
                     <div class="content">
-                        <a class="header">{{ ad.title }}</a>
+                        <a target="_blank" href="/ads/{{ ad.id }}" class="header">{{ ad.title }}</a>
                         <div class="meta">
                             <a>{{ ad.author }}</a>
                         </div>
                         <div class="description">{{ ad.description }}</div>
                         <div class="extra">
-                            <a href="/ads/{{ ad.id }}" class="ui right floated primary button">
+                            <a target="_blank" href="/ads/{{ ad.id }}" class="ui right floated primary button">
                                 اطلاعات بیشتر
                                 <i class="right chevron icon"></i>
                             </a>
+                            {% if ad.sell %}
+                                <div class="ui label">فروش</div>
+                            {% else %}
+                                <div class="ui label">خرید</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
