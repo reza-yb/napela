@@ -42,5 +42,3 @@ class BookAdTests(TestCase):
         with self.assertRaises(ValidationError):
             url = "static/test/book_image.jpg"
             create_book_ad(sell=False, poster_url=url)
-
-class
