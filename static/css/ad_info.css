@@ -1,8 +1,8 @@
 
 body {
-    background-image: url("../images/pattern4.jpg");
+    /*background-image: url("../images/pattern4.jpg");*/
     background-size: cover;
-    background-color: #cccccc;
+    background-color: #fafafa;
 }
 
 .info_container {

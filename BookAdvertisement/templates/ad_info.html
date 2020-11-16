@@ -16,53 +16,97 @@
             </p>
         </div>
     </div>
-
-    <h1 class="ad_info_h1" style="text-align: center">
-        {{ ad.title }}
-    </h1>
-    <div class="info_container">
-        {% if ad.poster.url is not None %}
-            <img class="info_container__image" src="{{ ad.poster.url }}">
-        {% else %}
-            {% if ad.sell %}
-                <img class="info_container__image" src="{% static 'images/sell_default.png' %}">
-            {% else %}
-                <img class="info_container__image" src="{% static 'images/buy_default.png' %}">
-            {% endif %}
-        {% endif %}
-
-        <div class="container__text">
-            <ul class="ad_info_ul">
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">شماره آگهی :</span>
-                    <span class="iransansdn_size2"> {{ ad.id }} </span></li>
-
-
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">نام کتاب :</span>
-                    <span class="iransansdn_size2"> {{ ad.title }} </span></li>
-
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">نویسنده :</span>
-                    <span class="iransansdn_size2"> {{ ad.author }} </span></li>
-
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">توضیحات :</span>
-                    <span class="iransansdn_size2"> {{ ad.description }} </span></li>
-
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">آگهی‌دهنده :</span>
-                    <span class="iransansdn_size2"> علی </span></li>
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">شماره :</span>
-                    <span class="iransansdn_size2"> 123456 </span></li>
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">دانشکده :</span>
-                    <span class="iransansdn_size2"> کامپیوتر </span></li>
-
-                <li class="ad_info_li"><span class="iransansdn_bold_size2">دانشگاه :</span>
-                    <span class="iransansdn_size2"> صنعتی شریف </span></li>
-
-            </ul>
+{##}
+{#    <h1 class="ad_info_h1" style="text-align: center">#}
+{#        {{ ad.title }}#}
+{#    </h1>#}
+{#    <div class="info_container">#}
+{#        {% if ad.poster.url is not None %}#}
+{#            <img class="info_container__image" src="{{ ad.poster.url }}">#}
+{#        {% else %}#}
+{#            <img class="info_container__image" src="{% static 'images/default.jpg' %}">#}
+{#        {% endif %}#}
+{##}
+{#        <div class="container__text">#}
+{#            <ul class="ad_info_ul">#}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">شماره آگهی :</span>#}
+{#                    <span class="iransansdn_size2"> {{ ad.id }} </span></li>#}
+{##}
+{##}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">نام کتاب :</span>#}
+{#                    <span class="iransansdn_size2"> {{ ad.title }} </span></li>#}
+{##}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">نویسنده :</span>#}
+{#                    <span class="iransansdn_size2"> {{ ad.author }} </span></li>#}
+{##}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">توضیحات :</span>#}
+{#                    <span class="iransansdn_size2"> {{ ad.description }} </span></li>#}
+{##}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">آگهی‌دهنده :</span>#}
+{#                    <span class="iransansdn_size2"> علی </span></li>#}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">شماره :</span>#}
+{#                    <span class="iransansdn_size2"> 123456 </span></li>#}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">دانشکده :</span>#}
+{#                    <span class="iransansdn_size2"> کامپیوتر </span></li>#}
+{##}
+{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">دانشگاه :</span>#}
+{#                    <span class="iransansdn_size2"> صنعتی شریف </span></li>#}
+{##}
+{#            </ul>#}
+{#        </div>#}
+{##}
+{#        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>#}
+{#        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>#}
+{##}
+{##}
+{#    </div>#}
+    <div class="ui container">
+        <div class="ui relaxed divided items">
+            <div class="item">
+                <div class="content" dir="rtl">
+                    <a class="header">{{ ad.title }}</a>
+                    <div class="meta">
+                        <a>{{ ad.author }}</a>
+                        <a>{{ ad.sell }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ui medium image">
+                    {% if ad.poster.url is not None %}
+                        <img src="{{ ad.poster.url }}" alt="image">
+                    {% else %}
+                        <img class="info_container__image" src="{% static 'images/default.jpg' %}" alt="image">
+                    {% endif %}
+                </div>
+                <div class="ui text container float right">
+                    <div class="ui segments">
+                        <div class="ui segment" dir="rtl">آگهی‌دهنده</div>
+                        <div class="ui segment" dir="rtl">شماره</div>
+                        <div class="ui segment" dir="rtl">دانشکده</div>
+                        <div class="ui segment" dir="rtl">دانشگاه</div>
+                        <div class="ui segment" dir="rtl">قیمت</div>
+                    </div>
+                </div>
+            </div>
+            <div class="item" dir="rtl">
+                <div class="description" dir="rtl">
+                  {{ ad.description }}
+                </div>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="spaced" dir="rtl">
+            <button class="green ui button" onclick="window.open('/ads/{{ ad.id }}/edit')">
+                ویرایش
+            </button>
+            <button class="red ui button" onclick="window.open('/ads/{{ ad.id }}/delete')">
+                حذف
+            </button>
         </div>
 
-        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>
-        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>
-
+{#        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>#}
+{#        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>#}
 
     </div>
-
 {% endblock content %}
