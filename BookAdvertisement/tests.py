@@ -67,7 +67,7 @@ class AllAdsViewTest(TestCase):
         response = self.client.get(reverse('all-ads'))
         html = str(response.content)
         for ad in ads:
-            self.assertInHTML(ad.title, html)
+            self.assertIn(ad.title, html)
 
 
 class AdInfoViewTest(TestCase):
@@ -93,9 +93,9 @@ class AdInfoViewTest(TestCase):
     def test_ad_info(self):
         response = self.client.get(reverse('ad', kwargs={'pk': 2}))
         html = str(response.content)
-        self.assertInHTML("correct_title", html)
-        self.assertInHTML("correct_author", html)
-        self.assertInHTML("correct_desc", html)
+        self.assertIn("correct_title", html)
+        self.assertIn("correct_author", html)
+        self.assertIn("correct_desc", html)
 
 
 class AdFormsTest(TestCase):
