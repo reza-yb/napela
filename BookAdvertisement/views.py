@@ -58,7 +58,7 @@ class AdUpdate(UpdateView):
         ctx = super(AdUpdate, self).get_context_data(**kwargs)
         temp_links = deepcopy(links)
         ctx['links'] = temp_links
-        ctx["page_title"] = "edit ad"
+        ctx["page_title"] = "ویرایش آگهی"
         ctx["nav"] = "ویرایش آگهی"
         return ctx
 

@@ -18,42 +18,23 @@
         </div>
     </div>
     <br>
-    <div class="info_container">
 
-        <form class="ui form" method="POST" enctype="multipart/form-data">
+    <div class="ui text container float center" dir="rtl">
+        <div class="ui segment">
+            <form class="ui form" method="POST" enctype="multipart/form-data">
 
-            <!-- Security token -->
-            {% csrf_token %}
-            <!-- Using the formset -->
-            {{ form.as_p }}
+                <!-- Security token -->
+                {% csrf_token %}
+                <!-- Using the formset -->
+                <strong>
+                    {{ form.as_p }}
+                </strong>
 
-{#            <div class="field" dir="rtl">>#}
-{#                <label>تصویر</label>#}
-{#                <input type="file" value="{{ poster }}">#}
-{#            </div>#}
-{##}
-{#            <div class="two fields" dir="rtl">#}
-{#                <div class="field" dir="rtl">#}
-{#                    <label>نام کتاب:</label>#}
-{#                    <input type="text" placeholder="" value="{{ title }}">#}
-{#                </div>#}
-{#                <div class="field">#}
-{#                    <label>نام نویسنده:</label>#}
-{#                    <input type="text" placeholder="" value="{{ author }}">#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="field" dir="rtl">>#}
-{#                <label>توضیحات</label>#}
-{#                <input type="text" placeholder="" value="{{ description }}">#}
-{#            </div>#}
-{##}
-{#            <div class="ui checkbox" dir="rtl">#}
-{#                <input type="checkbox" value="{{ sell }}">#}
-{#                <label>فروشی</label>#}
-{#            </div>#}
+                <div class="ui divider"></div>
+                <input class="green ui button" type="submit" value="ثبت">
+            </form>
 
-            <input class="green ui button" type="submit" value="ثبت">
-        </form>
+        </div>
     </div>
 
 {% endblock content %}

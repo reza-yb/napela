@@ -97,7 +97,9 @@
 
 {% block content %}
 
+
     <div class="pusher" dir="rtl">
+
         <div class="ui inverted vertical masthead center aligned segment" dir="rtl">
             <div class="ui text container" dir="rtl">
                 <h1 class="ui inverted header">
@@ -105,7 +107,10 @@
                 </h1>
                 <h2>دیگر نگران منابع درسی خود نباشید! </h2>
                 <br>
-                <a target="_blank" href="/ads/" class="ui huge primary button">مشاهده‌ی آگهی‌ها <i class="right arrow icon"></i></a>
+                <a target="_blank" href="/ads/" class="ui huge primary button">
+                    <i class="right arrow icon"></i>
+                    مشاهده‌ی آگهی‌ها
+                </a>
             </div>
         </div>
 
@@ -118,9 +123,9 @@
                         <h3 class="ui header">کتاب موردنیاز خود را ارزان بخرید</h3>
                         <p>بله، دیگر لازم نیست هزینه‌های نجومی برای کتاب‌های درسی خود بدهید یا کل میدان انقلاب را گز کنید!</p>
                     </div>
-{#                    <div class="six wide right floated column">#}
-{#                        <img src="assets/images/wireframe/white-image.png" class="ui large bordered rounded image">#}
-{#                    </div>#}
+                    <div class="six wide left floated column">
+                        <img src="{% static 'images/landing-left.jpg' %}" class="ui huge bordered rounded image">
+                    </div>
                 </div>
                 <div class="row" dir="rtl">
                     <div class="center aligned column" dir="rtl">
@@ -129,6 +134,7 @@
                 </div>
             </div>
         </div>
+
         <div class="ui vertical stripe quote segment" dir="rtl">
             <div class="ui equal width stackable internally celled grid" dir="rtl">
                 <div class="center aligned row" dir="rtl">
@@ -138,13 +144,14 @@
                     </div>
                     <div class="column" dir="rtl">
                         <h3>"دیگه فقط نگران نمره‌هامم"</h3>
-                        <p>
-{#                            <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys#}
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
+{#        <div class="ui vertical stripe segment"></div>#}
+        <img style="height: 500px; object-fit: cover;"
+             class="ui fluid image" src="{% static 'images/colored-books.webp' %}">
     </div>
 
     <div class="clearfix"></div>

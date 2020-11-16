@@ -8,75 +8,37 @@
 
 {% block content %}
     <div class="ui container">
-
         <div class="ui message">
             <h1 class="ui huge header">کتاب‌باز</h1>
             <p style="font-family: iransansdn; font-weight: bold" class="lead">
                 مکانی برای تبادل کتاب های شما
             </p>
         </div>
-        <div class="ui divider"></div>
     </div>
-    <br>
-{##}
-{#    <h1 class="ad_info_h1" style="text-align: center">#}
-{#        {{ ad.title }}#}
-{#    </h1>#}
-{#    <div class="info_container">#}
-{#        {% if ad.poster.url is not None %}#}
-{#            <img class="info_container__image" src="{{ ad.poster.url }}">#}
-{#        {% else %}#}
-{#            <img class="info_container__image" src="{% static 'images/default.jpg' %}">#}
-{#        {% endif %}#}
-{##}
-{#        <div class="container__text">#}
-{#            <ul class="ad_info_ul">#}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">شماره آگهی :</span>#}
-{#                    <span class="iransansdn_size2"> {{ ad.id }} </span></li>#}
-{##}
-{##}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">نام کتاب :</span>#}
-{#                    <span class="iransansdn_size2"> {{ ad.title }} </span></li>#}
-{##}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">نویسنده :</span>#}
-{#                    <span class="iransansdn_size2"> {{ ad.author }} </span></li>#}
-{##}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">توضیحات :</span>#}
-{#                    <span class="iransansdn_size2"> {{ ad.description }} </span></li>#}
-{##}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">آگهی‌دهنده :</span>#}
-{#                    <span class="iransansdn_size2"> علی </span></li>#}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">شماره :</span>#}
-{#                    <span class="iransansdn_size2"> 123456 </span></li>#}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">دانشکده :</span>#}
-{#                    <span class="iransansdn_size2"> کامپیوتر </span></li>#}
-{##}
-{#                <li class="ad_info_li"><span class="iransansdn_bold_size2">دانشگاه :</span>#}
-{#                    <span class="iransansdn_size2"> صنعتی شریف </span></li>#}
-{##}
-{#            </ul>#}
-{#        </div>#}
-{##}
-{#        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>#}
-{#        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>#}
-{##}
-{##}
-{#    </div>#}
+
+    <div class="ui divider"></div>
+
     <div class="ui container">
         <div class="ui relaxed divided items">
+            <!--  author title + sell/buy -->
             <div class="item">
                 <div class="content" dir="rtl">
-                    <a class="large header">{{ ad.title }}</a>
+                    <a class="ui large header">{{ ad.title }}</a>
                     <div class="meta" dir="rtl">
-                        <a>{{ ad.author }}</a>
                         {% if ad.sell %}
                             <div class="ui label">فروش</div>
                         {% else %}
                             <div class="ui label">خرید</div>
                         {% endif %}
+                        <a>{{ ad.author }}</a>
+                    </div>
+
                 </div>
             </div>
+
+            <!-- other information about the book -->
             <div class="item">
+                <!-- book image -->
                 <div class="ui medium image">
                     {% if ad.poster.url is not None %}
                         <img src="{{ ad.poster.url }}" alt="image">
@@ -84,6 +46,8 @@
                         <img class="info_container__image" src="{% static 'images/default.jpg' %}" alt="image">
                     {% endif %}
                 </div>
+
+                <!-- general information -->
                 <div class="ui text container float right">
                     <div class="ui segments">
                         <div class="ui segment" dir="rtl">
@@ -104,13 +68,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- long description -->
             <div class="item" dir="rtl">
                 <div class="description" dir="rtl">
                   {{ ad.description }}
                 </div>
             </div>
         </div>
+
         <div class="ui divider"></div>
+
+        <!-- action buttons -->
         <div class="spaced" dir="rtl">
             <button class="green ui button" onclick="window.open('/ads/{{ ad.id }}/edit')">
                 ویرایش
@@ -119,9 +88,5 @@
                 حذف
             </button>
         </div>
-
-{#        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>#}
-{#        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>#}
-
     </div>
 {% endblock content %}
