@@ -28,7 +28,7 @@ body {
 
 .info_container::after {
     /*background: url("../images/pattern.jpg");*/
-    background-color: #E5F9E7;
+    background-color: #fafafa;
     background-size: cover;
     position: absolute;
     content: "";
