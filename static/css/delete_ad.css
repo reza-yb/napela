@@ -1,7 +1,7 @@
 body {
-    background-image: url("../images/pattern1.jpg");
+    /*background-image: url("../images/pattern1.jpg");*/
     background-size: cover;
-    background-color: #cccccc;
+    background-color: #fafafa;
 }
 
 .new_ad_h2 {

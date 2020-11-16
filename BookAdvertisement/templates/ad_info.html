@@ -62,13 +62,17 @@
 {#    </div>#}
     <div class="ui container">
         <div class="ui relaxed divided items">
+            <div class="ui divider"></div>
             <div class="item">
                 <div class="content" dir="rtl">
                     <a class="header">{{ ad.title }}</a>
-                    <div class="meta">
+                    <div class="meta" dir="rtl">
                         <a>{{ ad.author }}</a>
-                        <a>{{ ad.sell }}</a>
-                    </div>
+                        {% if ad.sell %}
+                            <div class="ui label">فروش</div>
+                        {% else %}
+                            <div class="ui label">خرید</div>
+                        {% endif %}
                 </div>
             </div>
             <div class="item">
@@ -81,11 +85,21 @@
                 </div>
                 <div class="ui text container float right">
                     <div class="ui segments">
-                        <div class="ui segment" dir="rtl">آگهی‌دهنده</div>
-                        <div class="ui segment" dir="rtl">شماره</div>
-                        <div class="ui segment" dir="rtl">دانشکده</div>
-                        <div class="ui segment" dir="rtl">دانشگاه</div>
-                        <div class="ui segment" dir="rtl">قیمت</div>
+                        <div class="ui segment" dir="rtl">
+                            <strong>آگهی‌دهنده</strong>
+                        </div>
+                        <div class="ui segment" dir="rtl">
+                            <strong>شماره تماس</strong>
+                        </div>
+                        <div class="ui segment" dir="rtl">
+                            <strong>دانشکده</strong>
+                        </div>
+                        <div class="ui segment" dir="rtl">
+                            <strong>دانشگاه</strong>
+                        </div>
+                        <div class="ui segment" dir="rtl">
+                            <strong>قیمت</strong>
+                        </div>
                     </div>
                 </div>
             </div>
