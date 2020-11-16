@@ -74,9 +74,9 @@
             <div class="item">
                 <div class="ui medium image">
                     {% if ad.poster.url is not None %}
-                        <img src="{{ ad.poster.url }}">
+                        <img src="{{ ad.poster.url }}" alt="image">
                     {% else %}
-                        <img class="info_container__image" src="{% static 'images/default.jpg' %}">
+                        <img class="info_container__image" src="{% static 'images/default.jpg' %}" alt="image">
                     {% endif %}
                 </div>
                 <div class="ui text container float right">
@@ -95,9 +95,18 @@
                 </div>
             </div>
         </div>
+        <div class="ui divider"></div>
+        <div class="spaced" dir="rtl">
+            <button class="green ui button" onclick="window.open('/ads/{{ ad.id }}/edit')">
+                ویرایش
+            </button>
+            <button class="red ui button" onclick="window.open('/ads/{{ ad.id }}/delete')">
+                حذف
+            </button>
+        </div>
 
-        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>
-        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>
+{#        <button class="edit_button" onclick="window.open('/ads/{{ ad.id }}/edit')">ویرایش</button>#}
+{#        <button class="delete_button" onclick="window.open('/ads/{{ ad.id }}/delete')">حذف</button>#}
 
     </div>
 {% endblock content %}
