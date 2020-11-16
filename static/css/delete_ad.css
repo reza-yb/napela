@@ -16,11 +16,11 @@ body {
     position: relative;
     margin: auto;
     background-position: center center;
-    border: 12px solid #0e566c;
+    border: 5px solid #0e566c;
     border-radius: 10px;
     padding: 20px 40px 40px;
     width: 500px;
-    height: 120px;
+    height: 200px;
 }
 
 .info_container::after {

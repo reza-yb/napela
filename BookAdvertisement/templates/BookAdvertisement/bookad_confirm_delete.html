@@ -17,13 +17,19 @@
             </p>
         </div>
     </div>
+    <br>
+    <div class="ui divider"></div>
 
-    <h2 class="new_ad_h2" style="text-align: center">حذف آگهی</h2>
+{#    <h2 class="new_ad_h2" style="text-align: center">حذف آگهی</h2>#}
     <div class="info_container">
         <form class="ui form" method="post">{% csrf_token %}
-            <p style="text-align: center">Are you sure you want to delete "{{ object }}"?</p>
-            <button class="red ui button" type="submit">Delete</button>
-            <button class="ui button" onclick="window.open('/ads/{{ ad.id }}');return false;">Cancel</button>
+            <p style="text-align: right" dir="rtl">
+                آیا از حذف کتاب
+                {{ object }}
+                اطمینان دارید؟
+            </p>
+            <button class="red ui button" type="submit">حذف</button>
+            <button class="ui button" onclick="window.open('/ads/{{ ad.id }}');return false;">بازگشت</button>
         </form>
     </div>
 
