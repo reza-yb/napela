@@ -178,3 +178,6 @@ fabric.properties
 
 #new
 .idea/
+
+# your system sucks
+napela/settings.py
