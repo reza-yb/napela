@@ -10,9 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import os
-
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +26,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -39,7 +37,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,8 +46,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'BookAdvertisement.apps.UniservConfig',
+
+    # my packages
+    'channels',
     'django_heroku',
+    'jquery',
+
+    # My Apps
+    'BookAdvertisement.apps.UniservConfig',
+    'chat_channel'
+
 ]
 
 MIDDLEWARE = [
@@ -83,7 +88,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'napela.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -93,7 +97,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -113,6 +116,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Channels settings
+ASGI_APPLICATION = "napela.routing.application"
+redis_host = os.environ.get('REDIS_HOST', '127.0.0.1')
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(redis_host, 6379)],
+        },
+        # 'expiry': 60
+    },
+}
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -127,10 +144,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 if 'HOME' in os.environ and '/code' in os.environ['HOME']:
     import django_heroku
+
     django_heroku.settings(locals())
