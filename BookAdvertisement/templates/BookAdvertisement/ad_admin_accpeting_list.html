@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_header %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all_ads.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="ui container">
+
+        <div class="ui message">
+            <h1 class="ui huge header">کتاب‌باز</h1>
+            <p style="font-family: iransansdn; font-weight: bold" class="lead">
+                مکانی برای تبادل کتاب های شما
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="ui container">
+        <div class="ui relaxed divided items">
+            {% for ad in book_ads %}
+                <div class="item">
+                    <div href="/ads/{{ ad.id }}" class="ui small image">
+                        {% if ad.poster.url is not None %}
+                            <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
+                        {% else %}
+                            <img src="{% static 'images/default.jpg' %}" alt="Cinque Terre" width="600"
+                                     height="400">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <a target="_blank" href="/ads/{{ ad.id }}" class="header">{{ ad.title }}</a>
+                        <div class="meta">
+                            <a>{{ ad.author }}</a>
+                        </div>
+                        <div class="description">{{ ad.description }}</div>
+                        <div class="extra">
+                            <a target="_blank" href="/ads/{{ ad.id }}" class="ui right floated primary button">
+                                اطلاعات بیشتر
+                                <i class="right chevron icon"></i>
+                            </a>
+                            {% if ad.sell %}
+                                <div class="ui label">فروش</div>
+                            {% else %}
+                                <div class="ui label">خرید</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+
+{% endblock content %}
+

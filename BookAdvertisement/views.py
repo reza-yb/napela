@@ -22,11 +22,20 @@ def home_page_view(request):
 
 
 def get_all_ads(request):
-    template_name = 'all_ads.html'
-    queryset = BookAd.objects.all()
+    template_name = 'ad_admin_accepting_list.html'
+    queryset = BookAd.objects.all(status=BookAd.AdStatus.ACCEPTED)
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"
     context = {"page_title": "کلیه‌ی آگهی‌ها", "book_ads": queryset, "links": temp_links}
+    return render(request, template_name, context)
+
+
+def get_all_pending_ads_for_admin(request):
+    template_name = 'all_ads.html'
+    queryset = BookAd.objects.all(status=BookAd.AdStatus.PENDING)
+    temp_links = deepcopy(links)
+    temp_links[1]["class"] = "active item"
+    context = {"page_title": "کلیه‌ی آگهی‌ها در در انتظار تایید", "book_ads": queryset, "links": temp_links}
     return render(request, template_name, context)
 
 
@@ -71,6 +80,7 @@ class AdUpdate(UpdateView):
             return HttpResponseRedirect(obj.get_absolute_url())
         else:
             raise PermissionDenied("Custom message")
+
     def get_context_data(self, **kwargs):
         ctx = super(AdUpdate, self).get_context_data(**kwargs)
         temp_links = deepcopy(links)
