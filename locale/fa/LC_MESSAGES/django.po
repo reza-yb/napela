@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-20 21:40+0000\n"
+"POT-Creation-Date: 2020-12-20 21:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,9 +35,8 @@ msgid "entrance_year"
 msgstr "سال ورود"
 
 #: accounts/templates/accounts/edit_profile.html:8
-#: accounts/templates/django_registration/registration_form.html:7
-msgid "register"
-msgstr "ثبت نام"
+msgid "save"
+msgstr "ذخیره"
 
 #: accounts/templates/accounts/profile.html:13
 msgid "education institute"
@@ -46,6 +45,10 @@ msgstr "موسسه آموزشی"
 #: accounts/templates/accounts/profile.html:29
 msgid "entrance year"
 msgstr "سال ورود"
+
+#: accounts/templates/django_registration/registration_form.html:7
+msgid "register"
+msgstr "ثبت نام"
 
 #: accounts/templates/registration/login.html:7
 msgid "login"
