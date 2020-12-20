@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-20 19:30+0000\n"
+"POT-Creation-Date: 2020-12-20 21:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: accounts/models.py:7
+msgid "user"
+msgstr "کاربر"
+
+#: accounts/models.py:8
+msgid "university"
+msgstr "دانشگاه"
+
+#: accounts/models.py:9 accounts/templates/accounts/profile.html:21
+msgid "field"
+msgstr "رشته"
+
+#: accounts/models.py:10
+msgid "entrance_year"
+msgstr "سال ورود"
+
+#: accounts/templates/accounts/edit_profile.html:8
 #: accounts/templates/django_registration/registration_form.html:7
 msgid "register"
-msgstr ""
+msgstr "ثبت نام"
+
+#: accounts/templates/accounts/profile.html:13
+msgid "education institute"
+msgstr "موسسه آموزشی"
+
+#: accounts/templates/accounts/profile.html:29
+msgid "entrance year"
+msgstr "سال ورود"
 
 #: accounts/templates/registration/login.html:7
 msgid "login"
-msgstr ""
+msgstr "ورود"
