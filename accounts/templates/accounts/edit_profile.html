@@ -1,0 +1,9 @@
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ user_form|crispy }}
+    {{ profile_form|crispy }}
+    <input name="" type="submit" value="{% trans 'register' %}" />
+</form>

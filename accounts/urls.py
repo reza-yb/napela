@@ -14,9 +14,9 @@ urlpatterns = [
         name="activate",
     ),
 
-    path('login', auth_views.LoginView.as_view(), name='login'),
-    path('logout', auth_views.LogoutView.as_view(), name='logout'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
-    path('profile/<str:username>', views.profile_view, name='profile'),
-    path('profile/edit', views.edit_profile_view, name='edit'),
+    path('profile/edit/', views.edit_profile_view, name='edit'),
+    path('profile/<str:username>/', views.profile_view, name='profile'),
 ]

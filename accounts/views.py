@@ -1,17 +1,49 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseNotFound
+from django.contrib.auth.models import User
+
+from accounts.forms import ProfileForm, NamesForm
+from accounts.models import Profile
 
 
 def profile_view(request, username):
-    pass
+    user = get_object_or_404(User, username=username)
+    if hasattr(user, 'profile'):
+        return render(request,
+                'accounts/profile.html',
+                {'target': user})
+    elif request.user.is_authenticated and request.user.username == username:
+        return redirect('accounts:edit')
+    else:
+        return HttpResponseNotFound()
 
 
 @login_required
 def edit_profile_view(request):
-    form = ProfileForm(request.POST or None, instance=request.user.profile)
+    if not hasattr(request.user, 'profile'):
+        request.user.profile = Profile()
+
+    profile_form = ProfileForm(request.POST or None, instance=request.user.profile)
+    user_form = NamesForm(request.POST or None, instance=request.user)
+
     if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('profile', username=request.user.username)
-    return render(request, 'accounts/profile.html', {'form': form})
+        profile_valid = False
+        user_valid = False
+
+        if profile_form.is_valid():
+            profile_valid = True
+            profile = profile_form.save(commit=False)
+            if request.user.profile is None:
+                profile.user = request.user
+            profile.save()
+
+        if user_form.is_valid():
+            user_valid = True
+            user_form.save()
+
+        if user_valid and profile_valid:
+            return redirect('accounts:profile', username=request.user.username)
+
+    return render(request, 'accounts/edit_profile.html', {'profile_form': profile_form, 'user_form': user_form})
 
