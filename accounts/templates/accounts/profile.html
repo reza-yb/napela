@@ -1,0 +1,35 @@
+{% load i18n %}
+
+<table>
+    <tr>
+        <td>
+            {{ target.first_name }} {{ target.last_name }}
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {% trans 'education institute' %}
+        </td>
+        <td>
+            {{ target.profile.university }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {% trans 'field' %}
+        </td>
+        <td>
+            {{ target.profile.field}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {% trans 'entrance year' %}
+        </td>
+        <td>
+            {{ target.profile.entrance_year }}
+        </td>
+    </tr>
+</table>
