@@ -1,8 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from copy import deepcopy
+
+from django.core.exceptions import PermissionDenied
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
-from copy import deepcopy
 
 from .models import BookAd
 
@@ -30,7 +32,7 @@ def get_all_ads(request):
 
 def get_ad_info(request, pk):
     template_name = 'ad_info.html'
-    ad = BookAd.objects.get(pk=pk)
+    ad = get_object_or_404(BookAd, pk=pk)
     temp_links = deepcopy(links)
     context = {"page_title": "اطلاعات آگهی", "ad": ad, "links": temp_links}
     return render(request, template_name, context)
@@ -38,7 +40,14 @@ def get_ad_info(request, pk):
 
 class AdCreate(CreateView):
     model = BookAd
-    fields = '__all__'
+    fields = ['poster', 'title', 'author', 'description', 'sell']
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        if self.request.user.is_authenticated:
+            obj.owner = self.request.user
+        obj.save()
+        return HttpResponseRedirect(obj.get_absolute_url())
 
     def get_context_data(self, **kwargs):
         ctx = super(AdCreate, self).get_context_data(**kwargs)
@@ -52,8 +61,16 @@ class AdCreate(CreateView):
 
 class AdUpdate(UpdateView):
     model = BookAd
-    fields = '__all__'
+    fields = ['poster', 'title', 'author', 'description', 'sell']
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        if self.request.user.is_authenticated and obj.owner == self.request.user:
+            obj.owner = self.request.user
+            obj.save()
+            return HttpResponseRedirect(obj.get_absolute_url())
+        else:
+            raise PermissionDenied("Custom message")
     def get_context_data(self, **kwargs):
         ctx = super(AdUpdate, self).get_context_data(**kwargs)
         temp_links = deepcopy(links)
