@@ -3,7 +3,7 @@ from copy import deepcopy
 from django.core.exceptions import PermissionDenied
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .models import BookAd
@@ -22,17 +22,28 @@ def home_page_view(request):
 
 
 def get_all_ads(request):
-    template_name = 'ad_admin_accepting_list.html'
-    queryset = BookAd.objects.where(status=BookAd.AdStatus.ACCEPTED)
+    template_name = 'all_ads.html'
+    queryset = BookAd.objects.filter(status=BookAd.AdStatus.ACCEPTED)
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"
     context = {"page_title": "کلیه‌ی آگهی‌ها", "book_ads": queryset, "links": temp_links}
     return render(request, template_name, context)
 
 
+def update_ad_status(request, ad_id, accept):
+    if not request.user.is_authenticated or not request.user.is_superuser:
+        raise PermissionDenied()
+    add = get_object_or_404(BookAd, pk=ad_id)
+    add.status = accept
+    add.save()
+    return HttpResponseRedirect(reverse('BookAdvertisement:all-pending-ads'))
+
+
 def get_all_pending_ads_for_admin(request):
-    template_name = 'all_ads.html'
-    queryset = BookAd.objects.where(status=BookAd.AdStatus.PENDING)
+    if not request.user.is_authenticated or not request.user.is_superuser:
+        raise PermissionDenied()
+    template_name = 'BookAdvertisement/ad_admin_accepting_list.html'
+    queryset = BookAd.objects.filter(status=BookAd.AdStatus.PENDING)
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"
     context = {"page_title": "کلیه‌ی آگهی‌ها در در انتظار تایید", "book_ads": queryset, "links": temp_links}
@@ -79,7 +90,7 @@ class AdUpdate(UpdateView):
             obj.save()
             return HttpResponseRedirect(obj.get_absolute_url())
         else:
-            raise PermissionDenied("Custom message")
+            raise PermissionDenied()
 
     def get_context_data(self, **kwargs):
         ctx = super(AdUpdate, self).get_context_data(**kwargs)
