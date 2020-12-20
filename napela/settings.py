@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'BookAdvertisement.apps.UniservConfig',
+    'BookAdvertisement',
     'accounts',
     'django_heroku',
 ]
