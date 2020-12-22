@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 
 class BookAd(models.Model):
@@ -21,7 +22,7 @@ class BookAd(models.Model):
     author = models.CharField("نام نویسنده", max_length=30)
     description = models.TextField("توضیحات", max_length=500)
     sell = models.BooleanField("فروشی")
-    suggested_money = models.IntegerField(default=0, null=False)
+    suggested_money = models.IntegerField(verbose_name=_('suggested money'), default=0, null=False)
     status = models.CharField(max_length=255, choices=AdStatus.choices, verbose_name='status', default=AdStatus.PENDING)
 
     def __str__(self):
