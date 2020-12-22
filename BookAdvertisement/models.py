@@ -15,7 +15,7 @@ class BookAd(models.Model):
             print(tuple((i.name, i.value) for i in cls))
             return tuple((i.name, i.value) for i in cls)
 
-    owner = models.ForeignKey(User, blank=True, null=True, default=None, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE)
     poster = models.ImageField("تصویر", upload_to='ad_posters/', null=True, blank=True)
     title = models.CharField("نام کتاب", max_length=30)
     author = models.CharField("نام نویسنده", max_length=30)
