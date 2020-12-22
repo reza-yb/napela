@@ -1,19 +1,17 @@
 from copy import deepcopy
 
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.contrib.auth.decorators import user_passes_test, login_required
 
 from .models import BookAd
 
 links = [{"href": "/", "class": "item", "title": "صفحه اصلی"},
          {"href": "/ads", "class": "item", "title": "آگهی‌ها"},
          {"href": "/ads/new", "class": "item", "title": "ثبت آگهی"}]
-
-
 
 
 def get_all_ads(request):
@@ -59,8 +57,7 @@ class AdCreate(CreateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        if self.request.user.is_authenticated:
-            obj.owner = self.request.user
+        obj.owner = self.request.user
         obj.save()
         return HttpResponseRedirect(obj.get_absolute_url())
 
