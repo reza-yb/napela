@@ -13,45 +13,45 @@
     </div>
     <br>
 
-    <div class="ui text container float center" dir="rtl">
-        <div class="ui segment">
-            <table>
-                <tr>
-                    <td style="width: 60%;">
+            <div class="ui text container float right">
+                <div style="text-align: right;">
+                        <a href="{% url 'accounts:edit' %}">{% trans 'edit profile' %}</a>
+                </div>
+                <div class="ui segments">
+                    <div class="ui segment" dir="rtl">
                         <strong>
                             {{ target.first_name }} {{ target.last_name }}
-                        </strong>
-                    </td>
-                    <td>
-                        <a href="{% url 'accounts:edit' %}">{% trans 'edit profile' %}</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'education institute' %}
-                    </td>
-                    <td>
-                        {{ target.profile.university }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'field' %}
-                    </td>
-                    <td>
-                        {{ target.profile.field}}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {% trans 'entrance year' %}
-                    </td>
-                    <td>
-                        {{ target.profile.entrance_year }}
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-{% endblock %}
 
+                        </strong>
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>
+                            {% trans 'education institute' %}
+                            :
+                            {{ target.profile.university }}
+                        </strong>
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>
+                            {% trans 'field' %}
+                            :
+                            {{ target.profile.field }}
+                        </strong>
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>
+                            {% trans 'entrance year' %}
+                            :
+                            {{ target.profile.entrance_year }}
+                        </strong>
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>
+                            {% trans 'phone number' %}
+                            :
+                            {{ target.profile.phone_number }}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
