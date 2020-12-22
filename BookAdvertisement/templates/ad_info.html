@@ -52,17 +52,24 @@
                 <div class="ui segments">
                     <div class="ui segment" dir="rtl">
                         {% if ad.owner is not None %}
-                        <strong>آگهی‌دهنده: {{ ad.owner.first_name }}</strong>
+                        <strong>آگهی‌دهنده</strong>
+                        <strong>{{ ad.owner.first_name }} {{ ad.owner.first_name }} </strong>
+                        <strong>با نام کاربری</strong>
+                        <strong>{{ ad.owner.username }}</strong>
                         {% endif %}
                     </div>
                     <div class="ui segment" dir="rtl">
-                        <strong>شماره تماس: 093232615151</strong>
+                        <strong>شماره تماس:</strong>
+                        <strong>{{ ad.owner.profile.phone_number }}</strong>
+
                     </div>
                     <div class="ui segment" dir="rtl">
-                        <strong>دانشکده: کامپیوتر</strong>
+                        <strong>رشته:</strong>
+                        <strong>{{ ad.owner.profile.field }}</strong>
                     </div>
                     <div class="ui segment" dir="rtl">
-                        <strong>دانشگاه: صنعتی شریف</strong>
+                        <strong>دانشگاه:</strong>
+                        <strong>{{ ad.owner.profile.university }}</strong>
                     </div>
                     <div class="ui segment" dir="rtl">
                         <strong>قیمت: {{ ad.suggested_money }} تومان</strong>

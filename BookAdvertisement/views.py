@@ -53,7 +53,7 @@ def get_ad_info(request, pk):
 
 class AdCreate(CreateView):
     model = BookAd
-    fields = ['poster', 'title', 'author', 'description', 'sell']
+    fields = ['poster', 'title', 'author', 'description', 'sell', 'suggested_money']
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -73,7 +73,7 @@ class AdCreate(CreateView):
 
 class AdUpdate(UpdateView):
     model = BookAd
-    fields = ['poster', 'title', 'author', 'description', 'sell']
+    fields = ['poster', 'title', 'author', 'description', 'sell', 'suggested_money']
 
     def form_valid(self, form):
         obj = form.save(commit=False)
