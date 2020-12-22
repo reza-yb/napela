@@ -103,7 +103,7 @@ class AdUpdate(UpdateView):
 
 class AdDelete(DeleteView):
     model = BookAd
-    success_url = reverse_lazy('all-ads')
+    success_url = reverse_lazy('BookAdvertisement:all-ads')
 
     def get_context_data(self, **kwargs):
         ctx = super(AdDelete, self).get_context_data(**kwargs)
