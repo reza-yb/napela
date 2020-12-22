@@ -1,12 +1,11 @@
 from django.urls import path
-from .views import home_page_view, get_all_ads, get_ad_info, AdCreate, AdUpdate, AdDelete, \
+
+from .views import get_all_ads, get_ad_info, AdCreate, AdUpdate, AdDelete, \
     get_all_pending_ads_for_admin, update_ad_status
 
 app_name = 'BookAdvertisement'
 
-
 urlpatterns = [
-    # path('', home_page_view, name='home'),
     path('', get_all_ads, name='all-ads'),
     path('pending/', get_all_pending_ads_for_admin, name='all-pending-ads'),
     path('pending/<int:ad_id>/<str:accept>/', update_ad_status, name='update-pending-ad-status'),
