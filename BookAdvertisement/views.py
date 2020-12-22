@@ -5,6 +5,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 from .models import BookAd
 
@@ -30,18 +31,18 @@ def get_all_ads(request):
     return render(request, template_name, context)
 
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def update_ad_status(request, ad_id, accept):
-    if not request.user.is_authenticated or not request.user.is_superuser:
-        raise PermissionDenied()
     add = get_object_or_404(BookAd, pk=ad_id)
     add.status = accept
     add.save()
     return HttpResponseRedirect(reverse('BookAdvertisement:all-pending-ads'))
 
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def get_all_pending_ads_for_admin(request):
-    if not request.user.is_authenticated or not request.user.is_superuser:
-        raise PermissionDenied()
     template_name = 'BookAdvertisement/ad_admin_accepting_list.html'
     queryset = BookAd.objects.filter(status=BookAd.AdStatus.PENDING)
     temp_links = deepcopy(links)
