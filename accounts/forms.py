@@ -7,7 +7,7 @@ from accounts.models import Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['university', 'field', 'entrance_year']
+        fields = ['university', 'field', 'entrance_year', 'phone_number']
 
 
 class NamesForm(forms.ModelForm):

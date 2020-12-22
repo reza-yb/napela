@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-22 01:45+0000\n"
+"POT-Creation-Date: 2020-12-22 15:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,9 +62,13 @@ msgstr "دانشگاه"
 msgid "field"
 msgstr "رشته"
 
-#: accounts/models.py:10
-msgid "entrance_year"
+#: accounts/models.py:10 accounts/templates/accounts/profile.html:47
+msgid "entrance year"
 msgstr "سال ورود"
+
+#: accounts/models.py:11
+msgid "phone number"
+msgstr "شماره تلفن"
 
 #: accounts/templates/accounts/edit_profile.html:10
 #: accounts/templates/accounts/profile.html:26
@@ -82,10 +86,6 @@ msgstr "حساب کاربری"
 #: accounts/templates/accounts/profile.html:31
 msgid "education institute"
 msgstr "موسسه آموزشی"
-
-#: accounts/templates/accounts/profile.html:47
-msgid "entrance year"
-msgstr "سال ورود"
 
 #: accounts/templates/django_registration/activation_failed.html:10
 msgid "activate account"
