@@ -133,6 +133,7 @@ USE_TZ = True
 
 ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_REDIRECT_URL = 'accounts:my_profile'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
