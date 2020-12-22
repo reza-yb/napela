@@ -20,7 +20,6 @@ from django.urls import path, include
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  # path('accounts/', include('django_registration.backends.activation.urls')),
                   path('accounts/', include('accounts.urls', namespace='accounts')),
                   path('ads/', include('BookAdvertisement.urls', namespace='BookAdvertisement'))
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

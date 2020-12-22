@@ -1,35 +1,57 @@
+{% extends 'base.html' %}
 {% load i18n %}
 
-<table>
-    <tr>
-        <td>
-            {{ target.first_name }} {{ target.last_name }}
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {% trans 'education institute' %}
-        </td>
-        <td>
-            {{ target.profile.university }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {% trans 'field' %}
-        </td>
-        <td>
-            {{ target.profile.field}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            {% trans 'entrance year' %}
-        </td>
-        <td>
-            {{ target.profile.entrance_year }}
-        </td>
-    </tr>
-</table>
+{% block content %}
+    <div class="ui container">
+
+        <div class="ui message">
+            <h1 class="ui huge header">کتاب‌باز</h1>
+            <p style="font-family: iransansdn; font-weight: bold" class="lead">
+                {% trans 'profile' %}
+            </p>
+        </div>
+    </div>
+    <br>
+
+    <div class="ui text container float center" dir="rtl">
+        <div class="ui segment">
+            <table>
+                <tr>
+                    <td style="width: 60%;">
+                        <strong>
+                            {{ target.first_name }} {{ target.last_name }}
+                        </strong>
+                    </td>
+                    <td>
+                        <a href="{% url 'accounts:edit' %}">{% trans 'edit profile' %}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% trans 'education institute' %}
+                    </td>
+                    <td>
+                        {{ target.profile.university }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% trans 'field' %}
+                    </td>
+                    <td>
+                        {{ target.profile.field}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% trans 'entrance year' %}
+                    </td>
+                    <td>
+                        {{ target.profile.entrance_year }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

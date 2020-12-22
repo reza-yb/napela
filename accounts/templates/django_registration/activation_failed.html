@@ -1,1 +1,25 @@
-{{ activation_error }}
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="ui container">
+
+        <div class="ui message">
+            <h1 class="ui huge header">کتاب‌باز</h1>
+            <p style="font-family: iransansdn; font-weight: bold" class="lead">
+                {% trans 'activate account' %}
+            </p>
+        </div>
+    </div>
+    <br>
+
+    <div class="ui text container float center" dir="rtl">
+        <div class="ui segment">
+            <strong>
+                خطایی رخ داده است.
+            </strong>
+            <br />
+            {{ activation_error.message }}
+        </div>
+    </div>
+{% endblock %}

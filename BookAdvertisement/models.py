@@ -28,7 +28,7 @@ class BookAd(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('ad', kwargs={'pk': self.pk})
+        return reverse('BookAdvertisement:ad', kwargs={'pk': self.pk})
 
     def clean(self):
         if self.poster and not self.sell:

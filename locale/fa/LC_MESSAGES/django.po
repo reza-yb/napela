@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-20 21:51+0000\n"
+"POT-Creation-Date: 2020-12-22 01:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: BookAdvertisement/templates/base.html:44
+msgid "logout"
+msgstr "خروج"
+
+#: BookAdvertisement/templates/base.html:46
+msgid "my profile"
+msgstr "حساب کاربری"
+
+#: BookAdvertisement/templates/base.html:49
+#: accounts/templates/django_registration/registration_form.html:10
+#: accounts/templates/django_registration/registration_form.html:28
+msgid "register"
+msgstr "ثبت نام"
+
+#: BookAdvertisement/templates/base.html:51
+#: accounts/templates/registration/login.html:10
+#: accounts/templates/registration/login.html:28
+msgid "login"
+msgstr "ورود"
+
+#: BookAdvertisement/templates/base.html:54
+msgid "add ad"
+msgstr "ثبت آگهی"
+
+#: BookAdvertisement/templates/base.html:56
+msgid "ads list"
+msgstr "لیست آگهی‌ها"
+
+#: BookAdvertisement/templates/base.html:58
+msgid "home"
+msgstr "صفحه اصلی"
+
 #: accounts/models.py:7
 msgid "user"
 msgstr "کاربر"
@@ -26,7 +58,7 @@ msgstr "کاربر"
 msgid "university"
 msgstr "دانشگاه"
 
-#: accounts/models.py:9 accounts/templates/accounts/profile.html:21
+#: accounts/models.py:9 accounts/templates/accounts/profile.html:39
 msgid "field"
 msgstr "رشته"
 
@@ -34,22 +66,27 @@ msgstr "رشته"
 msgid "entrance_year"
 msgstr "سال ورود"
 
-#: accounts/templates/accounts/edit_profile.html:8
+#: accounts/templates/accounts/edit_profile.html:10
+#: accounts/templates/accounts/profile.html:26
+msgid "edit profile"
+msgstr "ویرایش حساب کاربری"
+
+#: accounts/templates/accounts/edit_profile.html:29
 msgid "save"
 msgstr "ذخیره"
 
-#: accounts/templates/accounts/profile.html:13
+#: accounts/templates/accounts/profile.html:10
+msgid "profile"
+msgstr "حساب کاربری"
+
+#: accounts/templates/accounts/profile.html:31
 msgid "education institute"
 msgstr "موسسه آموزشی"
 
-#: accounts/templates/accounts/profile.html:29
+#: accounts/templates/accounts/profile.html:47
 msgid "entrance year"
 msgstr "سال ورود"
 
-#: accounts/templates/django_registration/registration_form.html:7
-msgid "register"
-msgstr "ثبت نام"
-
-#: accounts/templates/registration/login.html:7
-msgid "login"
-msgstr "ورود"
+#: accounts/templates/django_registration/activation_failed.html:10
+msgid "activate account"
+msgstr "فعّال‌سازی حساب کارربری"

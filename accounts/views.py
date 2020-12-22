@@ -7,6 +7,11 @@ from accounts.forms import ProfileForm, NamesForm
 from accounts.models import Profile
 
 
+@login_required
+def my_profile_view(request):
+    return redirect('accounts:profile', request.user.username)
+
+
 def profile_view(request, username):
     user = get_object_or_404(User, username=username)
     if hasattr(user, 'profile'):
