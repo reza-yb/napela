@@ -25,6 +25,15 @@
             <div class="content" dir="rtl">
                 <a class="ui large header">{{ ad.title }}</a>
                 <div class="meta" dir="rtl">
+                    {% if ad.status == "PENDING" %}
+                    <div class="ui label">درانتظار تایید</div>
+                    {% elif ad.status == "REJECTED" %}
+                    <div class="ui label">رد شده</div>
+                    {% elif ad.status == "ACCEPTED" %}
+                    <div class="ui label">تایید شده</div>
+                    {% endif %}
+                </div>
+                <div class="meta" dir="rtl">
                     {% if ad.sell %}
                     <div class="ui label">فروش</div>
                     {% else %}
@@ -32,7 +41,6 @@
                     {% endif %}
                     <a>{{ ad.author }}</a>
                 </div>
-
             </div>
         </div>
 
