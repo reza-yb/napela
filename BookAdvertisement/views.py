@@ -56,10 +56,24 @@ class AdCreate(CreateView):
     fields = ['poster', 'title', 'author', 'description', 'sell', 'suggested_money']
 
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.owner = self.request.user
-        obj.save()
-        return HttpResponseRedirect(obj.get_absolute_url())
+        from datetime import datetime, timezone
+        # checking ad limit for user
+        book_ads = BookAd.objects.filter(owner=self.request.user).order_by('created_datetime')
+        now = datetime.now(timezone.utc)
+        if book_ads.count() < 3 or (now - book_ads[book_ads.count() - 3].created_datetime).days > 30:
+            from datetime import datetime
+            obj: BookAd = form.save(commit=False)
+            obj.owner = self.request.user
+            obj.created_datetime = datetime.now()
+            obj.save()
+            return HttpResponseRedirect(obj.get_absolute_url())
+        else:
+            # creation is not allowed
+            title = "محدودیت آگهی"
+            description = "سلام کاربر گرامی!" + "\n" + "هر کاربر در ماه تنها دسترسی به انتشار سه اگهی را دارد."
+            link_redirect = ""
+            return render(self.request, "BookAdvertisement/apply_information_page.html",
+                          {'title': title, 'description': description, 'link_redirect': link_redirect})
 
     def get_context_data(self, **kwargs):
         ctx = super(AdCreate, self).get_context_data(**kwargs)
@@ -76,9 +90,11 @@ class AdUpdate(UpdateView):
     fields = ['poster', 'title', 'author', 'description', 'sell', 'suggested_money']
 
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        if self.request.user.is_authenticated and obj.owner == self.request.user:
+        from django.utils import timezone
+        obj: BookAd = form.save(commit=False)
+        if obj.owner == self.request.user:
             obj.owner = self.request.user
+            obj.modified_datetime = timezone.datetime.now()
             obj.save()
             return HttpResponseRedirect(obj.get_absolute_url())
         else:

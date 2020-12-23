@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_header %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ad_info.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="ui container">
+    <div class="ui message">
+        <h1 class="ui huge header">کتاب‌باز</h1>
+        <p style="font-family: iransansdn; font-weight: bold" class="lead">
+            مکانی برای تبادل کتاب های شما
+        </p>
+    </div>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="ui container">
+    <div class="ui relaxed divided items">
+        <!--  author title + sell/buy -->
+        <div class="item">
+            <div class="content" dir="rtl">
+                <a class="ui large header">{{ title }}</a>
+                <div class="meta" dir="rtl">
+                    {{ description }}
+                </div>
+            </div>
+        </div>
+        <div class="spaced" dir="rtl">
+            <button class="green ui button"
+                    onclick="window.location.replace('{{ link_redirect }}/')">
+                باوشه
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock content %}
