@@ -17,7 +17,7 @@ def profile_view(request, username):
     if hasattr(user, 'profile'):
         return render(request,
                 'accounts/profile.html',
-                {'target': user})
+                {'target': user, 'ads': user.bookad_set.all()})
     elif request.user.is_authenticated and request.user.username == username:
         return redirect('accounts:edit')
     else:
