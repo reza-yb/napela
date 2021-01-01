@@ -1,3 +1,13 @@
+.project
+local_settings.py
+
+
+# vim
+*.swp
+
+# Translation
+*.mo
+
 # Django #
 *.log
 *.pot

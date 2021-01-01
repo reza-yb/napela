@@ -54,17 +54,17 @@ class AllAdsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('all-ads'))
+        response = self.client.get(reverse('BookAdvertisement:all-ads'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('all-ads'))
+        response = self.client.get(reverse('BookAdvertisement:all-ads'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'all_ads.html')
 
     def test_latest_ads_present(self):
         ads = BookAd.objects.order_by('-id')[:10]
-        response = self.client.get(reverse('all-ads'))
+        response = self.client.get(reverse('BookAdvertisement:all-ads'))
         html = str(response.content)
         for ad in ads:
             self.assertIn(ad.title, html)
@@ -82,16 +82,16 @@ class AdInfoViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('ad', kwargs={'pk': 2}))
+        response = self.client.get(reverse('BookAdvertisement:ad', kwargs={'pk': 2}))
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('ad', kwargs={'pk': 2}))
+        response = self.client.get(reverse('BookAdvertisement:ad', kwargs={'pk': 2}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ad_info.html')
 
     def test_ad_info(self):
-        response = self.client.get(reverse('ad', kwargs={'pk': 2}))
+        response = self.client.get(reverse('BookAdvertisement:ad', kwargs={'pk': 2}))
         html = str(response.content)
         self.assertIn("correct_title", html)
         self.assertIn("correct_author", html)
@@ -101,25 +101,25 @@ class AdInfoViewTest(TestCase):
 class AdFormsTest(TestCase):
 
     def test_ad_create_correct(self):
-        response = self.client.post(reverse('ad-new'), {'title': "test_title", 'author': "test_author", "description": "test_desc", "sell": False})
-        self.assertRedirects(response, reverse('ad', kwargs={'pk': 1}))
+        response = self.client.post(reverse('BookAdvertisement:ad-new'), {'title': "test_title", 'author': "test_author", "description": "test_desc", "sell": False})
+        self.assertRedirects(response, reverse('BookAdvertisement:ad', kwargs={'pk': 1}))
         self.assertEqual(BookAd.objects.last().title, "test_title")
 
     def test_ad_create_missing(self):
-        response = self.client.post(reverse('ad-new'), {'title': "test_title", "description": "test_desc", "sell": False})
+        response = self.client.post(reverse('BookAdvertisement:ad-new'), {'title': "test_title", "description": "test_desc", "sell": False})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(BookAd.objects.last(), None)
 
     def test_ad_edit(self):
         ad = create_book_ad()
-        response = self.client.post(reverse('ad-update', kwargs={'pk': 1}), {'title': "edited", 'author': "test_author", "description": "test_desc", "sell": False})
-        self.assertRedirects(response, reverse('ad', kwargs={'pk': 1}))
+        response = self.client.post(reverse('BookAdvertisement:ad-update', kwargs={'pk': 1}), {'title': "edited", 'author': "test_author", "description": "test_desc", "sell": False})
+        self.assertRedirects(response, reverse('BookAdvertisement:ad', kwargs={'pk': 1}))
         ad.refresh_from_db()
         self.assertEqual(ad.title, "edited")
 
     def test_ad_delete(self):
         ad = create_book_ad()
-        response = self.client.post(reverse('ad-delete', kwargs={'pk': 1}))
-        self.assertRedirects(response, reverse('all-ads'))
+        response = self.client.post(reverse('BookAdvertisement:ad-delete', kwargs={'pk': 1}))
+        self.assertRedirects(response, reverse('BookAdvertisement:all-ads'))
         with self.assertRaises(BookAd.DoesNotExist):
             ad.refresh_from_db()
