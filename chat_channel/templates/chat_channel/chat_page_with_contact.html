@@ -4,7 +4,7 @@
 
 <head>
     <script id="message-template" type="text/x-handlebars-template">
-        <li class="clearfix">
+        <li class="clearfix" dir="rtl">
             <div class="message-data align-right">
                 <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span> &nbsp; &nbsp;
                 <span class="message-data-name">{% verbatim %}{{messageOwner}}{% endverbatim %}</span> <i
@@ -33,13 +33,16 @@
     <script src="{% static 'js//jquery.min.js' %}"></script>
     <script src="{% static 'js//HandleBars.js' %}"></script>
     <script src="{% static 'js//reconnecting-websocket.min.js' %}"></script>
-
+    <script src="{% static 'js//socket_message_class.js' %}"></script>
     <script src="{% static 'js//chat_page_with_contact.js'%}"></script>
+    <script>
+        main({{request.user.id|default_if_none:'null'}},{{to_contact_id|default_if_none:'null'}},{{to_user_id|default_if_none:'null'}});
+    </script>
 
 </head>
 
 <body data-spy="scroll" data-target=".fixed-top">
-
+{% block content %}
 <div class="container clearfix">
     <div class="people-list" id="people-list">
         <!--        <div class="search">-->
@@ -47,36 +50,35 @@
         <!--            <i class="fa fa-search"></i>-->
         <!--        </div>-->
         <ul class="list">
-            <li class="clearfix borderlist">
+            {% for contact in contacts%}
+            <li class="clearfix poeple-list-item"
+                onclick="load_prev_messages_and_contact_avatar({{contact.pk|default_if_none:'null'}})">
                 <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar"/>
                 <div class="about">
-                    <div class="name">Vincent Porter</div>
-                    <!--                    <div class="status">-->
-                    <!--                        <i class="fa fa-circle online"></i> online-->
-                    <!--                    </div>-->
+                    <div class="name">{{ contact.contact_user.first_name }} {{ contact.contact_user.last_name }}</div>
+                    <div class="status">
+                        {% if contact.last_message is not None and contact.last_message.text is not None %}
+                        <div class="name">{{ contact.last_message.text }}</div>
+                        {% else %}
+                        <div class="name">No message yet</div>
+                        {% endif %}
+
+                    </div>
                 </div>
             </li>
-
-            <li class="clearfix borderlist">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar"/>
-                <div class="about">
-                    <div class="name">Dean Henry</div>
-                    <!--                    <div class="status">-->
-                    <!--                        <i class="fa fa-circle offline"></i> offline since Oct 28-->
-                    <!--                    </div>-->
-                </div>
-            </li>
-
+            {% endfor %}
         </ul>
     </div>
 
     <div class="chat">
         <div class="chat-header clearfix">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar"/>
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar"
+                 id="chat_page_contact_avatar"/>
 
             <div class="chat-about">
-                <div class="chat-with">Chat with Vincent Porter</div>
-                <div class="chat-num-messages">already 1902 messages</div>
+                <input type="hidden" id="chat_with_contact_id">
+                <input type="hidden" id="chat_with_user_id">
+                <div class="chat-with">Loading ...</div>
             </div>
             <i class="fa fa-star"></i>
         </div>
@@ -105,6 +107,7 @@
 
 </div>
 <!-- end container -->
+{% endblock %}
 
 
 </body>

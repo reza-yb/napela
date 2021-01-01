@@ -1,56 +1,13 @@
-function start_socket_and_listen(roomId) {
-
-    // Declare variables
-    var userName;
-
-    // Create Websocket
-    var chatSocket = new ReconnectingWebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat');
-
-    // Send message
-    chatSocket.onmessage = function(e) {
-        console.log('Got a message:' + e.data.toString());
-    };
-
-    chatSocket.onopen = function() {
-        chatSocket.send(JSON.stringify({ 'message': 'i am connected now' }));
-    };
-
-
-
-    chatSocket.onclose = function(e) {
-        console.log('Socket closed:' + e.toString());
-        console.log(e);
-    }
-
-    chatSocket.onerror = function(e) {
-        console.error("Error: " + e.toString());
-    };
-
-    // Sign off message
-    window.unload = function(e) {
-        console.log('page closed');
-    };
-}
-
-$(document).ready(function() {
-    start_socket_and_listen(120);
-    var chat = {
-        messageToSend: '',
-        messageResponses: [
-            'Why did the web developer leave the restaurant? Because of the table layout.',
-            'How do you comfort a JavaScript bug? You console it.',
-            'An SQL query enters a bar, approaches two tables and asks: "May I join you?"',
-            'What is the most used language in programming? Profanity.',
-            'What is the object-oriented way to become wealthy? Inheritance.',
-            'An SEO expert walks into a bar, bars, pub, tavern, public house, Irish pub, drinks, beer, alcohol'
-        ],
-        init: function() {
+var chat = {
+        init: function(ownerId) {
+            this.ownerId = ownerId
             this.cacheDOM();
             this.bindEvents();
             this.render();
         },
+        chatSocket: null,
+        messageToSend: '',
+        ownerId: null,
         cacheDOM: function() {
             this.$chatHistory = $('.chat-history');
             this.$button = $('button');
@@ -59,39 +16,34 @@ $(document).ready(function() {
         },
         bindEvents: function() {
             this.$button.on('click', this.addMessage.bind(this));
-            this.$textarea.on('keyup', this.addMessageEnter.bind(this));
+//            this.$textarea.on('keyup', this.addMessageEnter.bind(this));
         },
         render: function() {
             this.scrollToBottom();
             if (this.messageToSend.trim() !== '') {
-                var template = Handlebars.compile($("#message-template").html());
-                var context = {
-                    messageOutput: this.messageToSend,
-                    messageOwner: "Amir",
-                    time: this.getCurrentTime()
-                };
-                console.log(template(context));
-                this.$chatHistoryList.append(template(context));
-                console.log(this.$chatHistoryList);
+                try {
+                    var ownerId = this.ownerId;
+                    var contactId = document.getElementById("chat_with_contact_id").value;
+                    var toUserId = document.getElementById("chat_with_user_id").value;
 
-                this.scrollToBottom();
-                this.$textarea.val('');
-
-                // responses
-                var templateResponse = Handlebars.compile($("#message-response-template").html());
-                var contextResponse = {
-                    response: this.getRandomItem(this.messageResponses),
-                    messageOwner: "Tomas",
-                    time: this.getCurrentTime()
-                };
-
-                setTimeout(function() {
-                    this.$chatHistoryList.append(templateResponse(contextResponse));
-                    this.scrollToBottom();
-                }.bind(this), 1500);
-
+                    var chatMessage = new ChatMessage(ownerId,contactId,false,this.messageToSend.trim(),null);
+                    /// creating group code
+                    userIds = [ownerId,toUserId];
+                    userIds.sort(function(a, b) {
+                        if (a == null || b == null){
+                            return 1;
+                        }
+                        return a - b;
+                    });
+                    var channelRoom = userIds.join('-');
+                    var socket_message = new SocketMessage(MessageType.newMessage, channelRoom ,chatMessage)
+                    this.chatSocket.send(JSON.stringify(socket_message));
+                    this.$textarea.val('');
+                    this.messageToSend = '';
+                }catch(err) {
+                    console.log(err);
+                }
             }
-
         },
 
         addMessage: function() {
@@ -121,26 +73,106 @@ $(document).ready(function() {
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
+};
+
+function main(userId,toContactId,toUserId){
+    $(document).ready(function() {
+        load_prev_messages_and_contact_avatar(toContactId);
+        start_socket_and_listen(userId,toUserId);
+        chat_initialization(userId);
+    });
+}
+
+function chat_initialization(user_id){
+    chat.init(user_id);
+}
+
+function start_socket_and_listen(ownerId,toUserId) {
+
+    // Create Websocket
+    chat.chatSocket = new ReconnectingWebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat');
+
+    // Send message
+    chat.chatSocket.onmessage = function(e) {
+        var socketMessage = SocketMessage.fromJson(JSON.parse(e.data));
+        console.log(socketMessage);
     };
 
-    chat.init();
+    chat.chatSocket.onopen = function() {
+        userIds = [ownerId,toUserId];
+        userIds.sort(function(a, b) {
+            if (a == null || b == null){
+                return 1;
+            }
+            return a - b;
+        });
+        var channelRoom = userIds.join('-');
+        var socket_message = new SocketMessage(MessageType.setChannel, channelRoom ,"");
+        chat.chatSocket.send(JSON.stringify(socket_message));
+    };
 
-    //  var searchFilter = {
-    //    options: { valueNames: ['name'] },
-    //    init: function() {
-    //      var userList = new List('people-list', this.options);
-    //      var noItems = $('<li id="no-items-found">No items found</li>');
-    //
-    //      userList.on('updated', function(list) {
-    //        if (list.matchingItems.length === 0) {
-    //          $(list.list).append(noItems);
-    //        } else {
-    //          noItems.detach();
-    //        }
-    //      });
-    //    }
-    //  };
-    //
-    //  searchFilter.init();
+    chat.chatSocket.onclose = function(e) {
+        console.log('Socket closed:' + e.toString());
+        console.log(e);
+    }
+    chat.chatSocket.onerror = function(e) {
+        console.error("Error: " + e.toString());
+    };
+    // Sign off message
+    window.unload = function(e) {
+        console.log('page closed');
+    };
+}
 
-});
+function load_prev_messages_and_contact_avatar(to_contact_id){
+            var dataForm = "";
+            document.getElementsByClassName("chat-with")[0].innerText = "Loading ...";
+            $.ajax({
+                url: 'http://'+window.location.host+'/chat/prev_messages/'+String(to_contact_id)+"/",
+                data: dataForm,
+                dataType: 'json',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+            }).done(function (response) {
+                chat.$chatHistoryList.empty();
+                chat.cacheDOM();
+                /// load contact name in chat page
+                var contact_name = response.contact_info.first_name + " " + response.contact_info.first_name;
+                document.getElementsByClassName("chat-with")[0].innerText = contact_name;
+                ///////////////////////////////////////
+                /// setting user id to hidden input ///
+                ///////////////////////////////////////
+                document.getElementById("chat_with_contact_id").value = to_contact_id;
+                document.getElementById("chat_with_user_id").value = response.contact_info.id;
+                /// load contact old messages
+                response.prev_messages.forEach(function (message_data) {
+                    if(owner_user_id == message_data.owner.id){
+                        // self
+                        var template = Handlebars.compile($("#message-template").html());
+                        var context = {
+                            messageOutput: message_data.text,
+                            messageOwner: message_data.owner.first_name+" "+message_data.owner.last_name,
+                            time: message_data.created_datetime
+                        };
+                        chat.$chatHistoryList.append(template(context));
+                    }else{
+                        // user
+                        var templateResponse = Handlebars.compile($("#message-response-template").html());
+                        var contextResponse = {
+                            response: message_data.text,
+                            messageOwner: message_data.owner.first_name+" "+message_data.owner.last_name,
+                            time: message_data.created_datetime
+                        };
+                        chat.$chatHistoryList.append(templateResponse(contextResponse));
+                    }
+                });
+                chat.scrollToBottom();
+
+            }).fail(function (xhr, status, errorThrown) {
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+                console.dir(xhr);
+            });
+}

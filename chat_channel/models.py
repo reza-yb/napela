@@ -7,10 +7,9 @@ from django.shortcuts import get_object_or_404
 
 
 # TODO
-def get_user_json(user_id):
+def get_user_json(user):
     res = {"id": None, 'first_name': "", 'last_name': ""}
     try:
-        user: User = get_object_or_404(User, pk=user_id)
         res['id'] = user.pk
         res['first_name'] = user.first_name
         res['last_name'] = user.last_name
@@ -49,7 +48,7 @@ class ChatMessage(models.Model):
         chat.to = get_object_or_404(User, pk=to_user_id)
         chat.seen = seen
         chat.text = text
-        chat.created_datetime = created_date_time
+        chat.created_datetime = created_date_time if created_date_time is not None else datetime.datetime.now()
         return chat
 
     def to_json(self):
@@ -63,11 +62,17 @@ class ChatMessage(models.Model):
             to_user_id = self.to.id
         except:
             pass
-        return {'owner': get_user_json(owner_user_id), 'to_user_id': get_user_json(to_user_id), 'seen': self.seen,
+        return {'owner': get_user_json(self.owner), 'to_user_id': get_user_json(self.to), 'seen': self.seen,
                 'text': self.text,
                 'created_datetime': str(self.created_datetime)}
+
 
 class ChatContact(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     contact_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="contact_user")
-    last_messages = models.ForeignKey(ChatMessage, on_delete=models.DO_NOTHING, related_name="last_message")
+    last_message = models.ForeignKey(ChatMessage, on_delete=models.DO_NOTHING, related_name="last_message", null=True)
+
+    def empty_message(self):
+        if self.last_message is None or self.last_message.text is None:
+            return True
+        return False

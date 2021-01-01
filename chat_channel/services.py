@@ -1,6 +1,8 @@
 import json
 
-from chat_channel.models import ChatMessage
+from django.shortcuts import get_object_or_404
+
+from chat_channel.models import ChatMessage, ChatContact
 
 
 class ConsumerService:
@@ -20,10 +22,19 @@ class ConsumerService:
         new_chat_message_data = socket_data.get('message_data', {})
         try:
             # TODO it raises an error while in authentication is not implemented
+            contact_id = int(new_chat_message_data.get('contact_id', -1))
+            contact = get_object_or_404(ChatContact, pk=contact_id)
+            new_chat_message_data['to_user_id'] = contact.contact_user.pk
             chat_message = ChatMessage.from_json(new_chat_message_data)
             chat_message.save()
-        except:
-            pass
+            """ updating chat contacts last messages """
+            contact.last_message = chat_message
+            contact.save()
+            contact2 = ChatContact.objects.get(owner=contact.contact_user, contact_user=contact.owner)
+            contact2.last_message = chat_message
+            contact2.save()
+        except Exception as e:
+            print(e)
         return json.dumps(socket_data)
 
     @classmethod
