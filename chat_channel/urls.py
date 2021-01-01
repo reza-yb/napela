@@ -1,10 +1,10 @@
 from django.urls import path
 
-from chat_channel.views import popup_chat_page,chat_page_with_contact
+from chat_channel.views import chat_page_with_contact, get_prev_messages
 
 app_name = 'home'
 urlpatterns = [
-    path('popup_chat_page/', popup_chat_page, name='popup_chat_page'),
-    path('chat_page_with_contact/', chat_page_with_contact, name='chat_page_with_contact'),
+    path('chat_page_with_contact/<int:to_user_id>/', chat_page_with_contact, name='chat_page_with_contact'),
+    path('prev_messages/<owner_user_id>/<to_user_id>/', get_prev_messages, name='get_pre_messages')
 
 ]

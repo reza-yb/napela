@@ -4,6 +4,8 @@ from urllib.parse import parse_qs
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
+from chat_channel.services import ConsumerService
+
 
 class LiveScoreConsumer(WebsocketConsumer):
     def connect(self):
@@ -33,11 +35,24 @@ class LiveScoreConsumer(WebsocketConsumer):
         # raise DenyConnection("Invalid User")
 
     def receive(self, text_data):
-        print(text_data)
+        socket_data = json.loads(text_data)
+        message_type = socket_data.get('message_type', "unknown")
+        """ changing channel if necessary """
+        message_channel = socket_data.get('channel_room', "unknown")
+        ConsumerService.change_group_and_room(message_channel, self)
+        """"""""""""""""""""""""""""""""
+        """ processing data message  """
+        """"""""""""""""""""""""""""""""
+        response_message_json = {}
+        if message_type == "new_chat_message":
+            response_message_json = ConsumerService.new_chat_message(socket_data)
+        else:
+            response_message_json = ConsumerService.unknown_message(socket_data)
+
+        """ sending response message """
         async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name,
-            {"type": "chat.message",
-             "text": "unknown request type", })
+            self.room_group_name, {"type": "chat.message",
+                                   "text": response_message_json, })
 
     def chat_message(self, event):
         # Send message to WebSocket
