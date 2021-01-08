@@ -96,8 +96,34 @@ function start_socket_and_listen(ownerId,toUserId) {
 
     // Send message
     chat.chatSocket.onmessage = function(e) {
-        var socketMessage = SocketMessage.fromJson(JSON.parse(e.data));
-        console.log(socketMessage);
+        console.log("on message");
+        var message_type = JSON.parse(JSON.parse(e.data))['message_type'];
+        console.log(message_type)
+        if (message_type == "new_chat_message"){
+            var socketMessage = SocketMessage.fromJson(JSON.parse(JSON.parse(e.data)));
+            console.log(socketMessage.message_data);
+            var currentContactId = document.getElementById("chat_with_contact_id").value;
+            if(socketMessage.message_data.contact_id === currentContactId){
+                if(socketMessage.message_data.owner_user_id === chat.ownerId){
+                    var template = Handlebars.compile( $("#message-template").html());
+                    var context = {
+                      messageOutput: socketMessage.message_data.text,
+                      time: socketMessage.message_data.created_date_time
+                    };
+
+                    chat.$chatHistoryList.append(template(context));
+                    chat.scrollToBottom();
+                }else{
+                    var templateResponse = Handlebars.compile( $("#message-response-template").html());
+                    var contextResponse = {
+                      response: socketMessage.message_data.text,
+                      time: socketMessage.message_data.created_date_time
+                    };
+                    this.$chatHistoryList.append(templateResponse(contextResponse));
+                    this.scrollToBottom();
+                }
+            }
+        }
     };
 
     chat.chatSocket.onopen = function() {

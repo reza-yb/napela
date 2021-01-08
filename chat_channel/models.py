@@ -41,7 +41,7 @@ class ChatMessage(models.Model):
         to_user_id = data['to_user_id']
         seen = data.get('seen', False)
         text = data.get('text', "")
-        created_date_time = data.get('created_date_time', datetime.datetime.now())
+        created_date_time = data.get('created_date_time', str(datetime.datetime.now()))
         """ creating object """
         chat = ChatMessage()
         chat.owner = get_object_or_404(User, pk=owner_user_id)
@@ -68,8 +68,8 @@ class ChatMessage(models.Model):
 
 
 class ChatContact(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
-    contact_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="contact_user")
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="owner_user")
+    contact_user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="contact_user")
     last_message = models.ForeignKey(ChatMessage, on_delete=models.DO_NOTHING, related_name="last_message", null=True)
 
     def empty_message(self):

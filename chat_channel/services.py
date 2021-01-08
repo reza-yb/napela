@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.shortcuts import get_object_or_404
@@ -25,6 +26,10 @@ class ConsumerService:
             contact_id = int(new_chat_message_data.get('contact_id', -1))
             contact = get_object_or_404(ChatContact, pk=contact_id)
             new_chat_message_data['to_user_id'] = contact.contact_user.pk
+
+            ### setting time for message
+            new_chat_message_data['created_date_time'] = str(datetime.datetime.now())
+
             chat_message = ChatMessage.from_json(new_chat_message_data)
             chat_message.save()
             """ updating chat contacts last messages """
@@ -35,8 +40,9 @@ class ConsumerService:
             contact2.save()
         except Exception as e:
             print(e)
+        socket_data['message_data'] = new_chat_message_data
         return json.dumps(socket_data)
 
     @classmethod
     def unknown_message(cls, socket_data):
-        return "unknown request type"
+        return json.dumps({'message_type': 'unknown request type', 'channel_room': "", 'message_data': {}})
