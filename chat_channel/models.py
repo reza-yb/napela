@@ -42,6 +42,8 @@ class ChatMessage(models.Model):
         seen = data.get('seen', False)
         text = data.get('text', "")
         created_date_time = data.get('created_date_time', str(datetime.datetime.now()))
+        if created_date_time is None:
+            created_date_time = str(datetime.datetime.now())
         """ creating object """
         chat = ChatMessage()
         chat.owner = get_object_or_404(User, pk=owner_user_id)
@@ -62,9 +64,11 @@ class ChatMessage(models.Model):
             to_user_id = self.to.id
         except:
             pass
-        return {'owner': get_user_json(self.owner), 'to_user_id': get_user_json(self.to), 'seen': self.seen,
+        return {'owner_user_id': owner_user_id,
+                'to_user_id': to_user_id,
+                'seen': self.seen,
                 'text': self.text,
-                'created_datetime': str(self.created_datetime)}
+                'created_date_time': str(self.created_datetime)}
 
 
 class ChatContact(models.Model):

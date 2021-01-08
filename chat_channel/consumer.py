@@ -47,7 +47,7 @@ class LiveScoreConsumer(WebsocketConsumer):
         if message_type == "new_chat_message":
             response_message_json = ConsumerService.new_chat_message(socket_data)
         elif message_type == "set_channel":
-            pass
+            response_message_json = ConsumerService.set_channel(socket_data)
         else:
             response_message_json = ConsumerService.unknown_message(socket_data)
 

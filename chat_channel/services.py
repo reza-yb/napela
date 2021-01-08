@@ -1,6 +1,6 @@
-import datetime
 import json
 
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 from chat_channel.models import ChatMessage, ChatContact
@@ -22,27 +22,26 @@ class ConsumerService:
     def new_chat_message(cls, socket_data):
         new_chat_message_data = socket_data.get('message_data', {})
         try:
-            # TODO it raises an error while in authentication is not implemented
-            contact_id = int(new_chat_message_data.get('contact_id', -1))
-            contact = get_object_or_404(ChatContact, pk=contact_id)
-            new_chat_message_data['to_user_id'] = contact.contact_user.pk
-
             ### setting time for message
-            new_chat_message_data['created_date_time'] = str(datetime.datetime.now())
-
             chat_message = ChatMessage.from_json(new_chat_message_data)
             chat_message.save()
+            socket_data['message_data'] = chat_message.to_json()
+
             """ updating chat contacts last messages """
+            contact = ChatContact.objects.get(owner=chat_message.owner, contact_user=chat_message.to)
             contact.last_message = chat_message
             contact.save()
-            contact2 = ChatContact.objects.get(owner=contact.contact_user, contact_user=contact.owner)
+            contact2 = ChatContact.objects.get(owner=chat_message.to, contact_user=chat_message.owner)
             contact2.last_message = chat_message
             contact2.save()
         except Exception as e:
             print(e)
-        socket_data['message_data'] = new_chat_message_data
         return json.dumps(socket_data)
 
     @classmethod
     def unknown_message(cls, socket_data):
         return json.dumps({'message_type': 'unknown request type', 'channel_room': "", 'message_data': {}})
+
+    @classmethod
+    def set_channel(cls, socket_data):
+        return json.dumps({'message_type': 'set_channel', 'channel_room': "", 'message_data': {}})

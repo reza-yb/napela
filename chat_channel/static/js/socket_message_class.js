@@ -22,9 +22,9 @@ class SocketMessage {
     }
 }
 class ChatMessage {
-    constructor(owner_user_id, contact_id, seen, text, created_date_time) {
+    constructor(owner_user_id,to_user_id, seen, text, created_date_time) {
         this.owner_user_id = owner_user_id;
-        this.contact_id = contact_id;
+        this.to_user_id = to_user_id;
         this.seen = seen
         this.text = text
         this.created_date_time = created_date_time

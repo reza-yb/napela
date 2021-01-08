@@ -18,7 +18,7 @@ def get_prev_messages(request, to_contact_id):
     import json
     from django.http.response import HttpResponse
     prev_messages = ChatMessage.objects.filter(
-        Q(owner=request.user, to=contact.contact_user) | Q(to=request.user, owner=contact.contact_user))
+        Q(owner=request.user, to=contact.contact_user) | Q(to=request.user, owner=contact.contact_user)).order_by('created_datetime')
     contact_user = get_user_json(contact.contact_user)
     return HttpResponse(json.dumps({'prev_messages': [chat.to_json() for chat in prev_messages], 'contact_info': contact_user}))
 

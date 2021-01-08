@@ -23,10 +23,10 @@ var chat = {
             if (this.messageToSend.trim() !== '') {
                 try {
                     var ownerId = this.ownerId;
-                    var contactId = document.getElementById("chat_with_contact_id").value;
-                    var toUserId = document.getElementById("chat_with_user_id").value;
+                    var contactId = parseInt(document.getElementById("chat_with_contact_id").value);
+                    var toUserId = parseInt(document.getElementById("chat_with_user_id").value);
 
-                    var chatMessage = new ChatMessage(ownerId,contactId,false,this.messageToSend.trim(),null);
+                    var chatMessage = new ChatMessage(ownerId,toUserId,false,this.messageToSend.trim(),null);
                     /// creating group code
                     userIds = [ownerId,toUserId];
                     userIds.sort(function(a, b) {
@@ -102,9 +102,11 @@ function start_socket_and_listen(ownerId,toUserId) {
         if (message_type == "new_chat_message"){
             var socketMessage = SocketMessage.fromJson(JSON.parse(JSON.parse(e.data)));
             console.log(socketMessage.message_data);
-            var currentContactId = document.getElementById("chat_with_contact_id").value;
-            if(socketMessage.message_data.contact_id === currentContactId){
+            var currentToUserId = parseInt(document.getElementById("chat_with_user_id").value);
+            if((socketMessage.message_data.owner_user_id == chat.ownerId && socketMessage.message_data.to_user_id==currentToUserId) || (socketMessage.message_data.owner_user_id == currentToUserId && socketMessage.message_data.to_user_id==chat.ownerId)){
+                console.log("new contact message");
                 if(socketMessage.message_data.owner_user_id === chat.ownerId){
+                    console.log("my message sent.");
                     var template = Handlebars.compile( $("#message-template").html());
                     var context = {
                       messageOutput: socketMessage.message_data.text,
@@ -114,13 +116,14 @@ function start_socket_and_listen(ownerId,toUserId) {
                     chat.$chatHistoryList.append(template(context));
                     chat.scrollToBottom();
                 }else{
+                    console.log("contact message received");
                     var templateResponse = Handlebars.compile( $("#message-response-template").html());
                     var contextResponse = {
                       response: socketMessage.message_data.text,
                       time: socketMessage.message_data.created_date_time
                     };
-                    this.$chatHistoryList.append(templateResponse(contextResponse));
-                    this.scrollToBottom();
+                    chat.$chatHistoryList.append(templateResponse(contextResponse));
+                    chat.scrollToBottom();
                 }
             }
         }
@@ -173,14 +176,16 @@ function load_prev_messages_and_contact_avatar(to_contact_id){
                 document.getElementById("chat_with_contact_id").value = to_contact_id;
                 document.getElementById("chat_with_user_id").value = response.contact_info.id;
                 /// load contact old messages
+                console.log("prev");
+                console.log(response.prev_messages);
                 response.prev_messages.forEach(function (message_data) {
-                    if(owner_user_id == message_data.owner.id){
+                    if(chat.ownerId == message_data.owner_user_id){
                         // self
                         var template = Handlebars.compile($("#message-template").html());
                         var context = {
                             messageOutput: message_data.text,
-                            messageOwner: message_data.owner.first_name+" "+message_data.owner.last_name,
-                            time: message_data.created_datetime
+                            messageOwner: "",
+                            time: message_data.created_date_time
                         };
                         chat.$chatHistoryList.append(template(context));
                     }else{
@@ -188,8 +193,8 @@ function load_prev_messages_and_contact_avatar(to_contact_id){
                         var templateResponse = Handlebars.compile($("#message-response-template").html());
                         var contextResponse = {
                             response: message_data.text,
-                            messageOwner: message_data.owner.first_name+" "+message_data.owner.last_name,
-                            time: message_data.created_datetime
+                            messageOwner: "",
+                            time: message_data.created_date_time
                         };
                         chat.$chatHistoryList.append(templateResponse(contextResponse));
                     }
