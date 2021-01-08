@@ -26,14 +26,14 @@ class ChatMessage(models.Model):
     text = models.TextField(null=True)
     created_datetime = models.DateTimeField()
 
-    def __init__(self, owner=None, to=None, text="", created_date_time=datetime.datetime.now(), seen=False,
-                 *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.owner = owner
-        self.to = to
-        self.seen = seen
-        self.text = text
-        self.created_datetime = created_date_time
+    # def __init__(self, owner=None, to=None, text="", created_date_time=datetime.datetime.now(), seen=False,
+    #              *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.owner = owner
+    #     self.to = to
+    #     self.seen = seen
+    #     self.text = text
+    #     self.created_datetime = created_date_time
 
     @classmethod
     def from_json(cls, data):

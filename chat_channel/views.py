@@ -20,7 +20,7 @@ def get_prev_messages(request, to_contact_id):
     prev_messages = ChatMessage.objects.filter(
         Q(owner=request.user, to=contact.contact_user) | Q(to=request.user, owner=contact.contact_user))
     contact_user = get_user_json(contact.contact_user)
-    return HttpResponse(json.dumps({'prev_messages': list(prev_messages), 'contact_info': contact_user}))
+    return HttpResponse(json.dumps({'prev_messages': [chat.to_json() for chat in prev_messages], 'contact_info': contact_user}))
 
 
 # def popup_chat_page(request):
