@@ -88,16 +88,24 @@
 
         <!-- long description -->
         <div class="item" dir="rtl">
-            <strong>توضیحات</strong>
+            <strong>توضیحات:</strong>
             <div class="description" dir="rtl">
                 {{ ad.description }}
             </div>
         </div>
     </div>
-
     <div class="ui divider"></div>
     {% if ad.owner is not None %}
-    <!-- action buttons -->
+    {% if ad.owner.id != request.user.id %}
+    <div class="spaced" dir="rtl">
+        <button class="green ui button" onclick="window.open('/chat/my_chatroom/{{ ad.owner.id}}')">
+            ارتباط با اگهی دهنده
+        </button>
+    </div>
+    {% endif %}
+    {% endif %}
+    <div class="ui divider"></div>
+    {% if ad.owner is not None %}
     <div class="spaced" dir="rtl">
         <button class="green ui button" onclick="window.open('/ads/{{ ad.id }}/edit')">
             ویرایش

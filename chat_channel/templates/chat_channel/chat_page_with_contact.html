@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block extra_header %}
+<script id="message-template" type="text/x-handlebars-template">
+    <li class="clearfix" dir="rtl">
+        <div class="message-data align-right">
+            <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span> &nbsp; &nbsp;
+            <span class="message-data-name">{% verbatim %}{{messageOwner}}{% endverbatim %}</span> <i
+                class="fa fa-circle me"></i>
+        </div>
+        <div class="message other-message float-right">
+            {% verbatim %}{{messageOutput}}{% endverbatim %}
+        </div>
+    </li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+    <li>
+        <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> {% verbatim %}{{messageOwner}}{% endverbatim %}</span>
+            <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span>
+        </div>
+        <div class="message my-message">
+            {% verbatim %}{{response}}{% endverbatim %}
+        </div>
+    </li>
+</script>
+<link href="{% static 'css//chat_page_with_contact.css'%}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="{% static 'js//List.js' %}"></script>
+<script src="{% static 'js//jquery.min.js' %}"></script>
+<script src="{% static 'js//HandleBars.js' %}"></script>
+<script src="{% static 'js//reconnecting-websocket.min.js' %}"></script>
+<script src="{% static 'js//socket_message_class.js' %}"></script>
+<script src="{% static 'js//chat_page_with_contact.js'%}"></script>
+<script>
+        main({{request.user.id|default_if_none:'null'}},{{to_contact_id|default_if_none:'null'}},{{to_user_id|default_if_none:'null'}});
+
+
+
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+<body data-spy="scroll" data-target=".fixed-top">
+<div class="chat-container clearfix" style="">
+    <div class="people-list" id="people-list">
+        <ul class="list">
+            {% for contact in contacts%}
+            <li class="clearfix poeple-list-item"
+                onclick="load_prev_messages_and_contact_avatar({{contact.pk|default_if_none:'null'}})">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar"/>
+                <div class="about">
+                    <div class="name">{{ contact.contact_user.first_name }} {{ contact.contact_user.last_name }}</div>
+                    <div class="status">
+                        {% if contact.last_message is not None and contact.last_message.text is not None %}
+                        <div class="name">{{ contact.last_message.text }}</div>
+                        {% else %}
+                        <div class="name">No message yet</div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="chat">
+        <div class="chat-header clearfix">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar"
+                 id="chat_page_contact_avatar"/>
+
+            <div class="chat-about">
+                <input type="hidden" id="chat_with_contact_id">
+                <input type="hidden" id="chat_with_user_id">
+                <div class="chat-with">Loading ...</div>
+            </div>
+            <i class="fa fa-star"></i>
+        </div>
+        <!-- end chat-header -->
+
+        <div class="chat-history">
+            <ul>
+            </ul>
+
+        </div>
+        <!-- end chat-history -->
+
+        <div class="chat-message clearfix">
+            <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3"></textarea>
+
+            <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+            <i class="fa fa-file-image-o"></i>
+
+            <button>Send</button>
+
+        </div>
+        <!-- end chat-message -->
+
+    </div>
+    <!-- end chat -->
+
+</div>
+<!-- end container -->
+
+
+</body
+{% endblock %}

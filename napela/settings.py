@@ -47,12 +47,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # my packages
+    'channels',
     'crispy_forms',
+    'django_heroku',
+    'jquery',
 
-    'BookAdvertisement',
+    # My Apps
+    'chat_channel',
     'accounts',
     'home_page',
-    'django_heroku',
+    'BookAdvertisement',
+
 ]
 
 MIDDLEWARE = [
@@ -112,6 +118,21 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Channels settings
+ASGI_APPLICATION = "napela.routing.application"
+redis_host = os.environ.get('REDIS_HOST', '127.0.0.1')
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(redis_host, 6379)],
+        },
+        # 'expiry': 60
+    },
+}
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
