@@ -165,7 +165,7 @@ function load_prev_messages_and_contact_avatar(to_contact_id){
                 chat.$chatHistoryList.empty();
                 chat.cacheDOM();
                 /// load contact name in chat page
-                var contact_name = response.contact_info.first_name + " " + response.contact_info.first_name;
+                var contact_name = response.contact_info.first_name + " " + response.contact_info.last_name;
                 document.getElementsByClassName("chat-with")[0].innerText = contact_name;
                 ///////////////////////////////////////
                 /// setting user id to hidden input ///

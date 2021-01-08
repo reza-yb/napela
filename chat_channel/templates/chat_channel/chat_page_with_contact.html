@@ -1,54 +1,54 @@
-<!DOCTYPE html> {% load static %} {% load i18n %}
-<html lang="en">
-{% load static %} {% load i18n %}
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
 
-<head>
-    <script id="message-template" type="text/x-handlebars-template">
-        <li class="clearfix" dir="rtl">
-            <div class="message-data align-right">
-                <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span> &nbsp; &nbsp;
-                <span class="message-data-name">{% verbatim %}{{messageOwner}}{% endverbatim %}</span> <i
-                    class="fa fa-circle me"></i>
-            </div>
-            <div class="message other-message float-right">
-                {% verbatim %}{{messageOutput}}{% endverbatim %}
-            </div>
-        </li>
-    </script>
+{% block extra_header %}
+<script id="message-template" type="text/x-handlebars-template">
+    <li class="clearfix" dir="rtl">
+        <div class="message-data align-right">
+            <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span> &nbsp; &nbsp;
+            <span class="message-data-name">{% verbatim %}{{messageOwner}}{% endverbatim %}</span> <i
+                class="fa fa-circle me"></i>
+        </div>
+        <div class="message other-message float-right">
+            {% verbatim %}{{messageOutput}}{% endverbatim %}
+        </div>
+    </li>
+</script>
 
-    <script id="message-response-template" type="text/x-handlebars-template">
-        <li>
-            <div class="message-data">
-                <span class="message-data-name"><i class="fa fa-circle online"></i> {% verbatim %}{{messageOwner}}{% endverbatim %}</span>
-                <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span>
-            </div>
-            <div class="message my-message">
-                {% verbatim %}{{response}}{% endverbatim %}
-            </div>
-        </li>
-    </script>
-    <link href="{% static 'css//chat_page_with_contact.css'%}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="{% static 'js//List.js' %}"></script>
-    <script src="{% static 'js//jquery.min.js' %}"></script>
-    <script src="{% static 'js//HandleBars.js' %}"></script>
-    <script src="{% static 'js//reconnecting-websocket.min.js' %}"></script>
-    <script src="{% static 'js//socket_message_class.js' %}"></script>
-    <script src="{% static 'js//chat_page_with_contact.js'%}"></script>
-    <script>
+<script id="message-response-template" type="text/x-handlebars-template">
+    <li>
+        <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> {% verbatim %}{{messageOwner}}{% endverbatim %}</span>
+            <span class="message-data-time">{% verbatim %}{{time}}{% endverbatim %}</span>
+        </div>
+        <div class="message my-message">
+            {% verbatim %}{{response}}{% endverbatim %}
+        </div>
+    </li>
+</script>
+<link href="{% static 'css//chat_page_with_contact.css'%}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="{% static 'js//List.js' %}"></script>
+<script src="{% static 'js//jquery.min.js' %}"></script>
+<script src="{% static 'js//HandleBars.js' %}"></script>
+<script src="{% static 'js//reconnecting-websocket.min.js' %}"></script>
+<script src="{% static 'js//socket_message_class.js' %}"></script>
+<script src="{% static 'js//chat_page_with_contact.js'%}"></script>
+<script>
         main({{request.user.id|default_if_none:'null'}},{{to_contact_id|default_if_none:'null'}},{{to_user_id|default_if_none:'null'}});
-    </script>
 
-</head>
 
-<body data-spy="scroll" data-target=".fixed-top">
+
+
+
+</script>
+{% endblock %}
+
 {% block content %}
-<div class="container clearfix">
+<body data-spy="scroll" data-target=".fixed-top">
+<div class="chat-container clearfix" style="">
     <div class="people-list" id="people-list">
-        <!--        <div class="search">-->
-        <!--            <input type="text" placeholder="search"/>-->
-        <!--            <i class="fa fa-search"></i>-->
-        <!--        </div>-->
         <ul class="list">
             {% for contact in contacts%}
             <li class="clearfix poeple-list-item"
@@ -107,9 +107,7 @@
 
 </div>
 <!-- end container -->
-{% endblock %}
 
 
 </body>
-
-</html>
+{% endblock %}
