@@ -29,10 +29,23 @@ class BookAd(models.Model):
     created_datetime = models.DateTimeField(null=False, auto_now_add=True, )
     modified_datetime = models.DateTimeField(null=False, default=timezone.datetime(year=2020, month=1, day=1))
     # scoring fields
-    addresser = models.ForeignKey(User, blank=False, null=True, on_delete=models.DO_NOTHING,related_name="addresser")
+    addresser = models.ForeignKey(User, blank=True, null=True, on_delete=models.DO_NOTHING, related_name="addresser")
 
     def __str__(self):
         return self.title
+
+    def owner_score(self):
+        all_ads = BookAd.objects.filter(owner=self.owner)
+        scores = []
+        for ad in all_ads:
+            try:
+                score = ad.advertisement.score
+                scores.append(score)
+            except:
+                pass
+        if len(scores) == 0:
+            return "5.0"
+        return "%.1f" % (sum(scores) / len(scores))
 
     def get_absolute_url(self):
         return reverse('BookAdvertisement:ad', kwargs={'pk': self.pk})

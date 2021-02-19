@@ -2,11 +2,11 @@ from copy import deepcopy
 
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.exceptions import PermissionDenied
+from django.db import models
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.db import models
 
 from .models import BookAd
 
@@ -25,8 +25,8 @@ def get_all_ads(request):
             filter_params[key] = request.GET[key]
 
     template_name = 'all_ads.html'
-    queryset = BookAd.objects.filter(status=BookAd.AdStatus.ACCEPTED)\
-            .filter(**filter_params)
+    queryset = BookAd.objects.filter(status=BookAd.AdStatus.ACCEPTED) \
+        .filter(**filter_params)
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"
     context = {"page_title": "کلیه‌ی آگهی‌ها", "book_ads": queryset, "links": temp_links}
@@ -55,9 +55,10 @@ def get_all_pending_ads_for_admin(request):
 
 def get_ad_info(request, pk):
     template_name = 'ad_info.html'
-    ad = get_object_or_404(BookAd, pk=pk)
+    ad: BookAd = get_object_or_404(BookAd, pk=pk)
+    owner_score = ad.owner_score()
     temp_links = deepcopy(links)
-    context = {"page_title": "اطلاعات آگهی", "ad": ad, "links": temp_links}
+    context = {"page_title": "اطلاعات آگهی", "ad": ad, "links": temp_links, "owner_score": owner_score}
     return render(request, template_name, context)
 
 

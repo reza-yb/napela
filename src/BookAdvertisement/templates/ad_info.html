@@ -67,6 +67,11 @@
                         {% endif %}
                     </div>
                     <div class="ui segment" dir="rtl">
+                        <strong>امتیاز کلی صاحب آگهی:</strong>
+                        <strong>{{ owner_score }}</strong>
+
+                    </div>
+                    <div class="ui segment" dir="rtl">
                         <strong>شماره تماس:</strong>
                         <strong>{{ ad.owner.profile.phone_number }}</strong>
 
@@ -105,7 +110,7 @@
     {% endif %}
     {% endif %}
     <div class="ui divider"></div>
-    {% if ad.owner is not None %}
+    {% if ad.owner == request.user %}
     <div class="spaced" dir="rtl">
         <button class="green ui button" onclick="window.open('/ads/{{ ad.id }}/edit')">
             ویرایش
@@ -133,7 +138,7 @@
     <div class="spaced" dir="rtl">
         <div>
             <strong>
-                پاسخ دهنده به آگهی شما:
+                پاسخ دهنده به آگهی:
             </strong>
         </div>
         <br>
@@ -143,6 +148,21 @@
 
     </div>
     {% endif %}
-    {% endif %}
+    {% elif ad.addresser == request.user %}
+    <div class="spaced" dir="rtl">
+        <form action="{% url 'user_score:give_score' ad_id=ad.id %}" method="POST">
+            <!-- Security token -->
+            {% csrf_token %}
+            <!-- Using the formset -->
+            <input type="number" max="5" min="1" id="score" name="score" value="{{ ad.advertisement.score}}">
+            <button class="red ui button" type="submit">
+                امتیاز دادن
+            </button>
+
+        </form>
+    </div>
+    {% else %}
+    None:)
+    {% endif%}
 </div>
 {% endblock content %}

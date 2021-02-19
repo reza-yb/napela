@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'jquery',
 
     # My Apps
+    'user_score',
     'chat_channel',
     'accounts',
     'home_page',
@@ -132,8 +133,6 @@ CHANNEL_LAYERS = {
     },
 }
 
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -171,4 +170,5 @@ except:
     pass
 
 import django_heroku
+
 django_heroku.settings(locals())
