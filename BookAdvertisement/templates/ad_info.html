@@ -114,6 +114,35 @@
             حذف
         </button>
     </div>
+    <br>
+    {% if ad.status == "ACCEPTED" %}
+    <div class="spaced" dir="rtl">
+        <form action="{% url 'user_score:set_addresser_and_done' ad_id=ad.id %}" method="POST">
+            <!-- Security token -->
+            {% csrf_token %}
+            <!-- Using the formset -->
+            <input type="text" placeholder="نام‌کاربری جواب دهنده آگهی" id="addresser_username"
+                   name="addresser_username">
+            <button class="red ui button" type="submit">
+                خاتمه آگهی
+            </button>
+
+        </form>
+    </div>
+    {% elif ad.status == "DONE" %}
+    <div class="spaced" dir="rtl">
+        <div>
+            <strong>
+                پاسخ دهنده به آگهی شما:
+            </strong>
+        </div>
+        <br>
+        <strong>
+            {{ ad.addresser.username }}
+        </strong>
+
+    </div>
+    {% endif %}
     {% endif %}
 </div>
 {% endblock content %}
