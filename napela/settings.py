@@ -170,7 +170,5 @@ try:
 except:
     pass
 
-if 'HOME' in os.environ and '/code' in os.environ['HOME']:
-    import django_heroku
-
-    django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())
