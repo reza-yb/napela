@@ -1,11 +1,9 @@
-from datetime import datetime
-
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import gettext as _
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 
 class BookAd(models.Model):
@@ -13,6 +11,7 @@ class BookAd(models.Model):
         PENDING = "PENDING",
         ACCEPTED = "ACCEPTED",
         REJECTED = "REJECTED",
+        DONE = "DONE"
 
         @classmethod
         def choices(cls):
@@ -27,8 +26,10 @@ class BookAd(models.Model):
     sell = models.BooleanField("فروشی")
     suggested_money = models.IntegerField(verbose_name=_('suggested money'), default=0, null=False)
     status = models.CharField(max_length=255, choices=AdStatus.choices, verbose_name='status', default=AdStatus.PENDING)
-    created_datetime = models.DateTimeField(null=False, auto_now_add=True,)
+    created_datetime = models.DateTimeField(null=False, auto_now_add=True, )
     modified_datetime = models.DateTimeField(null=False, default=timezone.datetime(year=2020, month=1, day=1))
+    # scoring fields
+    addresser = models.ForeignKey(User, blank=False, null=True, on_delete=models.DO_NOTHING,related_name="addresser")
 
     def __str__(self):
         return self.title
