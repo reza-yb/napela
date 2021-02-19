@@ -6,6 +6,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.db import models
 
 from .models import BookAd
 
@@ -15,8 +16,17 @@ links = [{"href": "/", "class": "item", "title": "صفحه اصلی"},
 
 
 def get_all_ads(request):
+    filter_params = dict()
+    for key in request.GET:
+        attr = getattr(BookAd, key, None)
+        if attr and isinstance(attr.field, models.IntegerField):
+            filter_params[key] = int(request.GET[key])
+        else:
+            filter_params[key] = request.GET[key]
+
     template_name = 'all_ads.html'
-    queryset = BookAd.objects.filter(status=BookAd.AdStatus.ACCEPTED)
+    queryset = BookAd.objects.filter(status=BookAd.AdStatus.ACCEPTED)\
+            .filter(**filter_params)
     temp_links = deepcopy(links)
     temp_links[1]["class"] = "active item"
     context = {"page_title": "کلیه‌ی آگهی‌ها", "book_ads": queryset, "links": temp_links}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 
 {% block extra_header %}
@@ -17,6 +18,33 @@
         </div>
     </div>
     <br>
+    <div class="ui container" dir="rtl">
+        <div class="ui relaxed divided items">
+            <h2>{% trans "Search" %}</h2>
+            <form class="ui form">
+                <div class="field">
+                    <label>{% trans "title" %}</label>
+                    <input type="text" name="title__contains" placeholder="{% trans "title" %}">
+                </div>
+                <div class="field">
+                    <label>{% trans "min cost" %}</label>
+                    <input type="text" name="suggested_money__gte" placeholder="{% trans "minimum cost" %}" value="0">
+                </div>
+                <div class="field">
+                    <label>{% trans "max cost" %}</label>
+                    <input type="text" name="suggested_money__lte" placeholder="{% trans "maximum cost" %}" value="1000000">
+                </div>
+                <div class="field">
+                    <label>{% trans "owner" %}</label>
+                    <input type="text" name="owner__username__contains" placeholder="{% trans "owner username" %}">
+                </div>
+                <button class="ui button" type="submit">
+                    {% trans "search" %}
+                </button>
+            </form>
+        </div>
+        <div class="ui divider"></div>
+    </div>
     <div class="ui container">
         <div class="ui relaxed divided items">
             {% for ad in book_ads %}
