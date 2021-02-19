@@ -1,3 +1,13 @@
+@font-face {
+    font-family: IRANSans;
+    src: url(/static/fonts/IRANSans.ttf);
+}
+
+@font-face {
+    font-family: iransansdn;
+    src: url(/static/fonts/IRANSans.ttf);
+}
+
 body {
     background-image: url("../images/pattern.jpg");
     background-size: cover;
@@ -5,6 +15,15 @@ body {
     padding-top: 54px;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: grayscale;
+    font-family: IRANSans;
+}
+
+* {
+    font-family: IRANSans;
+}
+
+.header {
+    font-family: IRANSans;
 }
 
 .ui.borderless.menu {
