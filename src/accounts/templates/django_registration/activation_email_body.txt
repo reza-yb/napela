@@ -1,0 +1,1 @@
+{% url 'accounts:activate' activation_key %}

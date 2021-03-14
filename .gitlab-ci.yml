@@ -1,0 +1,16 @@
+image: python:latest
+
+stages:
+    - test
+    - deploy
+
+test:
+    stage: test
+    script: "bash scripts/test.sh"
+
+deploy:
+    stage: deploy
+    script: "bash scripts/deploy-heroku.sh koohnavard-staging $HEROKU_STAGING_API_KEY"
+    only:
+        - master
+

@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="ui container">
+
+    <div class="ui message">
+        <h1 class="ui huge header">کتاب‌باز</h1>
+        <p style="font-family: iransansdn; font-weight: bold" class="lead">
+            {% trans 'profile' %}
+        </p>
+    </div>
+</div>
+<br>
+
+<div class="ui text container float right">
+    <div style="text-align: right;">
+        <a href="{% url 'accounts:edit' %}">{% trans 'edit profile' %}</a>
+    </div>
+    <div class="ui segments">
+        <div class="ui segment" dir="rtl">
+            <strong>
+                {{ target.first_name }} {{ target.last_name }}
+
+            </strong>
+        </div>
+        <div class="ui segment" dir="rtl">
+            <strong>
+                {% trans 'education institute' %}
+                :
+                {{ target.profile.university }}
+            </strong>
+        </div>
+        <div class="ui segment" dir="rtl">
+            <strong>
+                {% trans 'field' %}
+                :
+                {{ target.profile.field }}
+            </strong>
+        </div>
+        <div class="ui segment" dir="rtl">
+            <strong>
+                {% trans 'entrance year' %}
+                :
+                {{ target.profile.entrance_year }}
+            </strong>
+        </div>
+        <div class="ui segment" dir="rtl">
+            <strong>
+                {% trans 'phone number' %}
+                :
+                {{ target.profile.phone_number }}
+            </strong>
+        </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="spaced" dir="rtl">
+        <button class="green ui button" onclick="window.open('/chat/my_chatroom/{{ request.user.id }}')">
+            چت های من
+        </button>
+    </div>
+    <br>
+    <br>
+    <div>
+        <strong>
+            {% trans "your advertisements" %}
+        </strong>
+
+    </div>
+    <br>
+    <br>
+    <div class="ui container">
+        <div class="ui relaxed divided items">
+            {% for ad in user_ads %}
+            <div class="item">
+                <div href="/ads/{{ ad.id }}" class="ui small image">
+                    {% if ad.poster.url is not None %}
+                    <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
+                    {% else %}
+                    <img src="{% static 'images/default.jpg' %}" alt="Cinque Terre" width="600"
+                         height="400">
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <a target="_blank" href="/ads/{{ ad.id }}" class="header">{{ ad.title }}</a>
+                    <div class="meta">
+                        <a>{{ ad.author }}</a>
+                    </div>
+                    <div class="description">{{ ad.description }}</div>
+                    <div class="extra">
+                        <a target="_blank" href="/ads/{{ ad.id }}" class="ui right floated primary button">
+                            اطلاعات بیشتر
+                            <i class="right chevron icon"></i>
+                        </a>
+                        {% if ad.sell %}
+                        <div class="ui label">فروش</div>
+                        {% else %}
+                        <div class="ui label">خرید</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <br>
+            <div>
+                    {% trans "no advertisement yet" %}
+
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+        <div>
+            <strong>
+                {% trans "your advertisements which you can give them score" %}
+            </strong>
+
+        </div>
+        <br>
+        <br>
+        <div class="ui container">
+            <div class="ui relaxed divided items">
+                {% for ad in score_ads %}
+                <div class="item">
+                    <div href="/ads/{{ ad.id }}" class="ui small image">
+                        {% if ad.poster.url is not None %}
+                        <img src="{{ ad.poster.url }}" alt="Cinque Terre" width="600" height="400">
+                        {% else %}
+                        <img src="{% static 'images/default.jpg' %}" alt="Cinque Terre" width="600"
+                             height="400">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <a target="_blank" href="/ads/{{ ad.id }}" class="header">{{ ad.title }}</a>
+                        <div class="meta">
+                            <a>{{ ad.author }}</a>
+                        </div>
+                        <div class="description">{{ ad.description }}</div>
+                        <div class="extra">
+                            <a target="_blank" href="/ads/{{ ad.id }}" class="ui right floated primary button">
+                                اطلاعات بیشتر
+                                <i class="right chevron icon"></i>
+                            </a>
+                            {% if ad.sell %}
+                            <div class="ui label">فروش</div>
+                            {% else %}
+                            <div class="ui label">خرید</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <br>
+                <div>
+                    {% trans "no advertisement yet to score" %}
+
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_header %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ad_info.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="ui container">
+    <div class="ui message">
+        <h1 class="ui huge header">کتاب‌باز</h1>
+        <p style="font-family: iransansdn; font-weight: bold" class="lead">
+            مکانی برای تبادل کتاب های شما
+        </p>
+    </div>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="ui container">
+    <div class="ui relaxed divided items">
+        <!--  author title + sell/buy -->
+        <div class="item">
+            <div class="content" dir="rtl">
+                <a class="ui large header">{{ ad.title }}</a>
+                <div class="meta" dir="rtl">
+                    {% if ad.status == "PENDING" %}
+                    <div class="ui label">درانتظار تایید</div>
+                    {% elif ad.status == "REJECTED" %}
+                    <div class="ui label">رد شده</div>
+                    {% elif ad.status == "ACCEPTED" %}
+                    <div class="ui label">تایید شده</div>
+                    {% endif %}
+                </div>
+                <div class="meta" dir="rtl">
+                    {% if ad.sell %}
+                    <div class="ui label">فروش</div>
+                    {% else %}
+                    <div class="ui label">خرید</div>
+                    {% endif %}
+                    <a>{{ ad.author }}</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- other information about the book -->
+        <div class="item">
+            <!-- book image -->
+            <div class="ui medium image">
+                {% if ad.poster.url is not None %}
+                <img src="{{ ad.poster.url }}" alt="image">
+                {% else %}
+                <img class="info_container__image" src="{% static 'images/default.jpg' %}" alt="image">
+                {% endif %}
+            </div>
+
+            <!-- general information -->
+            <div class="ui text container float right">
+                <div class="ui segments">
+                    <div class="ui segment" dir="rtl">
+                        {% if ad.owner is not None %}
+                        <strong>آگهی‌دهنده</strong>
+                        <strong>{{ ad.owner.first_name }} {{ ad.owner.first_name }} </strong>
+                        <strong>با نام کاربری</strong>
+                        <strong>{{ ad.owner.username }}</strong>
+                        {% endif %}
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>امتیاز کلی صاحب آگهی:</strong>
+                        <strong>{{ owner_score }}</strong>
+
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>شماره تماس:</strong>
+                        <strong>{{ ad.owner.profile.phone_number }}</strong>
+
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>رشته:</strong>
+                        <strong>{{ ad.owner.profile.field }}</strong>
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>دانشگاه:</strong>
+                        <strong>{{ ad.owner.profile.university }}</strong>
+                    </div>
+                    <div class="ui segment" dir="rtl">
+                        <strong>قیمت: {{ ad.suggested_money }} تومان</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- long description -->
+        <div class="item" dir="rtl">
+            <strong>توضیحات:</strong>
+            <div class="description" dir="rtl">
+                {{ ad.description }}
+            </div>
+        </div>
+    </div>
+    <div class="ui divider"></div>
+    {% if ad.owner is not None %}
+    {% if ad.owner.id != request.user.id %}
+    <div class="spaced" dir="rtl">
+        <button class="green ui button" onclick="window.open('/chat/my_chatroom/{{ ad.owner.id}}')">
+            ارتباط با اگهی دهنده
+        </button>
+    </div>
+    {% endif %}
+    {% endif %}
+    <div class="ui divider"></div>
+    {% if ad.owner == request.user %}
+    <div class="spaced" dir="rtl">
+        <button class="green ui button" onclick="window.open('/ads/{{ ad.id }}/edit')">
+            ویرایش
+        </button>
+        <button class="red ui button" onclick="window.open('/ads/{{ ad.id }}/delete')">
+            حذف
+        </button>
+    </div>
+    <br>
+    {% if ad.status == "ACCEPTED" %}
+    <div class="spaced" dir="rtl">
+        <form action="{% url 'user_score:set_addresser_and_done' ad_id=ad.id %}" method="POST">
+            <!-- Security token -->
+            {% csrf_token %}
+            <!-- Using the formset -->
+            <input type="text" placeholder="نام‌کاربری جواب دهنده آگهی" id="addresser_username"
+                   name="addresser_username">
+            <button class="red ui button" type="submit">
+                خاتمه آگهی
+            </button>
+
+        </form>
+    </div>
+    {% elif ad.status == "DONE" %}
+    <div class="spaced" dir="rtl">
+        <div>
+            <strong>
+                پاسخ دهنده به آگهی:
+            </strong>
+        </div>
+        <br>
+        <strong>
+            {{ ad.addresser.username }}
+        </strong>
+
+    </div>
+    {% endif %}
+    {% elif ad.addresser == request.user %}
+    <div class="spaced" dir="rtl">
+        <form action="{% url 'user_score:give_score' ad_id=ad.id %}" method="POST">
+            <!-- Security token -->
+            {% csrf_token %}
+            <!-- Using the formset -->
+            <input type="number" max="5" min="1" id="score" name="score" value="{{ ad.advertisement.score}}">
+            <button class="red ui button" type="submit">
+                امتیاز دادن
+            </button>
+
+        </form>
+    </div>
+    {% else %}
+    None:)
+    {% endif%}
+</div>
+{% endblock content %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+{% load static %}
+{% load i18n %}
+
+<head>
+    <link href="{% static 'css//popup_chat_bootstrap.css'%}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static 'js//jquery.min.js' %}"></script>
+    <script src="{% static 'js//popup_chat_bootstrap.js'%}"></script>
+    <script>
+                load_prev_messages({{ prev_messages_html|safe }})
+
+    </script>
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+<div id="center-text">
+    <h2>ChatBox UI</h2>
+    <p>Message send and scroll to bottom enabled </p>
+</div>
+<div id="body">
+
+    <div id="chat-circle" class="btn btn-raised">
+        <div id="chat-overlay"></div>
+        <i class="material-icons">speaker_phone</i>
+    </div>
+    <input type="hidden" class="chat-submit" id="chatroom_id"/>
+
+
+    <div class="chat-box">
+        <div class="chat-box-header">
+            ChatBot
+            <span class="chat-box-toggle"><i class="material-icons">close</i></span>
+        </div>
+        <div class="chat-box-body">
+            <div class="chat-box-overlay">
+            </div>
+            <div class="chat-logs">
+
+            </div><!--chat-log -->
+        </div>
+        <div class="chat-input">
+            <form>
+                <input type="text" id="chat-input" placeholder="Send a message..."/>
+                <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

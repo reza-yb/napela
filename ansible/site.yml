@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  tasks:
+    - name: install packages
+      become: true
+      become_user: root
+      apt:
+        state: present
+        name:
+         - python3-dev
+         - python3-pip
+         - gettext
+
